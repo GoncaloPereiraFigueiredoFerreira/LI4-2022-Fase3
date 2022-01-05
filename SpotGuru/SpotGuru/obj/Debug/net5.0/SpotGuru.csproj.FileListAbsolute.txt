@@ -322,11 +322,6 @@ C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotG
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Delete.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Details.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Edit.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews1\Create.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews1\Delete.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews1\Details.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews1\Edit.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews1\Index.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Create.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Delete.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Details.cshtml.g.cs

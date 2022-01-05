@@ -1,20 +1,26 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SpotGuru.Models;
 
 namespace SpotGuru
 {
     public class Program
     {
+        private static object scope;
+
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
+            var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            seedData.Initialize(services);
             host.Run();
         }
 
