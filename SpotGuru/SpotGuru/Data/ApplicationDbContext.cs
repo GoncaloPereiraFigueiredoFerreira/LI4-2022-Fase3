@@ -13,6 +13,18 @@ namespace SpotGuru.Data
             : base(options)
         {
         }
-        public DbSet<SpotGuru.Models.Monumentos> Monumentos { get; set; }
+        public DbSet<Monumentos> Monumentos { get; set; }
+        public DbSet<Horario> Horario { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Slots> Slots { get; set; }
+        public DbSet<Favoritos> Favoritos { get; set; }
+        public DbSet<Historico> Historico { get; set; }
+
+        }
+
+
+
+
+
     }
-}
+

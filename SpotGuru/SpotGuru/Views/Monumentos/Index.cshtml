@@ -7,6 +7,9 @@
 
 <h1>Index</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -17,16 +20,13 @@
                 @Html.DisplayNameFor(model => model.Descrição)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Localizacao.Latitude)
+                @Html.DisplayNameFor(model => model.Latitude)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Localizacao.Longitude)
+                @Html.DisplayNameFor(model => model.Longitude)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDHorario)
             </th>
             <th></th>
         </tr>
@@ -41,16 +41,13 @@
                 @Html.DisplayFor(modelItem => item.Descrição)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Localizacao.Latitude)
+                @Html.DisplayFor(modelItem => item.Latitude)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Localizacao.Longitude)
+                @Html.DisplayFor(modelItem => item.Longitude)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Categoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDHorario)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -1,41 +1,32 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpotGuru.Models
 {
-
     public class Monumentos
     {
-
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Descrição { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public Categorias Categoria { get; set; }
+        public Horario Horario { get; set; }
+        public List<Review> Reviews { get; set; }
 
         public Monumentos()
         {
-
+                
         }
-        public int Id { get; set; }
-
-        public string Nome { get; set; }
-
-        public string Descrição { get; set; }
-        public string PathFoto { get; set; }
-
-        public Localizacao Localizacao { get; set; }
-
-        public List<Review> Reviews { get; set; }
-
-        public string Categoria {get;set;}
-
-        public int IDHorario { get; set; }
-
-        public Monumentos(int id, string nome, string descrição, double latitude, double longitude, List<Review> reviews, string categoria, int IDhorario)
+        public Monumentos(int id, string nome, string descrição, double latitude, double longitude, Categorias categoria, Horario horario, List<Review> reviews)
         {
             Id = id;
             Nome = nome;
             Descrição = descrição;
-            Localizacao = new Localizacao(latitude, longitude);
-            Reviews = reviews;
+            Latitude = latitude;
+            Longitude = longitude;
             Categoria = categoria;
-            IDHorario = IDhorario;
+            Horario = horario;
+            Reviews = reviews;
         }
     }
 }

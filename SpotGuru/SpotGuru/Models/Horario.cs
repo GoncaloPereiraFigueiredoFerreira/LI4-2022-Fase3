@@ -8,9 +8,12 @@ namespace SpotGuru.Models
         public int HoraAbertura { get; set; }
         public int HoraEncerrament { get; set; }
         public float CustoSlot { get; set; }
-
         public List<Slots> Slots { get; set; }
 
+        public Horario()
+        {
+
+        }
         public Horario(int id, int horaAbertura, int horaEncerrament, float custoSlot, List<Slots> slots)
         {
             Id = id;

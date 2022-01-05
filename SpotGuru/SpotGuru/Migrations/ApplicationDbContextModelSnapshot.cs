@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpotGuru.Data;
 
-namespace SpotGuru.Data.Migrations
+namespace SpotGuru.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -219,47 +219,157 @@ namespace SpotGuru.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("SpotGuru.Models.Favoritos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MonumentosId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UtilizadorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MonumentosId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("Favoritos");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Historico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MonumentosId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UtilizadorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MonumentosId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("Historico");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Horario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("CustoSlot")
+                        .HasColumnType("real");
+
+                    b.Property<int>("HoraAbertura")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HoraEncerrament")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Horario");
+                });
+
             modelBuilder.Entity("SpotGuru.Models.Monumentos", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
 
                     b.Property<string>("Descrição")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("HorarioId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PathFoto")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("HorarioId");
 
                     b.ToTable("Monumentos");
                 });
 
             modelBuilder.Entity("SpotGuru.Models.Review", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Classificacao")
+                        .HasColumnType("int");
 
                     b.Property<string>("Comentario")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonumentoID")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("MonumentosId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("MonumentosId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MonumentosId");
 
-                    b.ToTable("Review");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Slots", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Dia")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Hora")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HorarioId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UtilizadorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HorarioId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("Slots");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -313,11 +423,76 @@ namespace SpotGuru.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SpotGuru.Models.Favoritos", b =>
+                {
+                    b.HasOne("SpotGuru.Models.Monumentos", "Monumentos")
+                        .WithMany()
+                        .HasForeignKey("MonumentosId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorId");
+
+                    b.Navigation("Monumentos");
+
+                    b.Navigation("Utilizador");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Historico", b =>
+                {
+                    b.HasOne("SpotGuru.Models.Monumentos", "Monumentos")
+                        .WithMany()
+                        .HasForeignKey("MonumentosId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorId");
+
+                    b.Navigation("Monumentos");
+
+                    b.Navigation("Utilizador");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Monumentos", b =>
+                {
+                    b.HasOne("SpotGuru.Models.Horario", "Horario")
+                        .WithMany()
+                        .HasForeignKey("HorarioId");
+
+                    b.Navigation("Horario");
+                });
+
             modelBuilder.Entity("SpotGuru.Models.Review", b =>
                 {
-                    b.HasOne("SpotGuru.Models.Monumentos", null)
+                    b.HasOne("SpotGuru.Models.Monumentos", "Monumentos")
                         .WithMany("Reviews")
                         .HasForeignKey("MonumentosId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Monumentos");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Slots", b =>
+                {
+                    b.HasOne("SpotGuru.Models.Horario", null)
+                        .WithMany("Slots")
+                        .HasForeignKey("HorarioId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorId");
+
+                    b.Navigation("Utilizador");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Horario", b =>
+                {
+                    b.Navigation("Slots");
                 });
 
             modelBuilder.Entity("SpotGuru.Models.Monumentos", b =>

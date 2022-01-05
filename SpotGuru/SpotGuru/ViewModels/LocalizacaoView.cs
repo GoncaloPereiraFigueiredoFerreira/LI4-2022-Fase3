@@ -2,7 +2,7 @@
 
 namespace SpotGuru.Models
 {
-    public class Localizacao
+    public class LocalizacaoView
     {
         public string Id { get; set; }
   
@@ -11,7 +11,7 @@ namespace SpotGuru.Models
         public double Longitude { get; set; }
 
         
-        public Localizacao(double latitude, double longitude)
+        public LocalizacaoView(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;

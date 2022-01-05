@@ -3,26 +3,26 @@
     public class Review
     {
 
-        public string Id { get; set; }
-        public string MonumentoID { get; set; } 
-        
+        public int Id { get; set; }
+        public Monumentos Monumentos{ get; set; }
+
         public string Comentario { get; set; }
 
-        public string UserID { get; set; }
+        public int Classificacao { get; set; }  
 
-
+        public Microsoft.AspNetCore.Identity.IdentityUser User { get; set; }
 
         public Review()
         {
 
         }
 
-        public Review(string id, string monumentoID, string comentario, string userID)
+        public Review(int id, Monumentos monumentos, string comentario, Microsoft.AspNetCore.Identity.IdentityUser user)
         {
             Id = id;
-            MonumentoID = monumentoID;
+            Monumentos = monumentos;
             Comentario = comentario;
-            UserID = userID;
+            User = user;
         }
     }
 }

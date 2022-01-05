@@ -2,7 +2,7 @@
 
 namespace SpotGuru.Models
 {
-    public class Utilizador
+    public class UtilizadorView
     {
 
         public int Id { get; set; }
@@ -13,7 +13,7 @@ namespace SpotGuru.Models
         public List<string> Historico { get; set; }
         public List<string> Favoritos { get; set; }
 
-        public Utilizador(int id, string nome, string email, string telemovel)
+        public UtilizadorView(int id, string nome, string email, string telemovel)
         {
             Id = id;
             Nome = nome;
@@ -21,7 +21,7 @@ namespace SpotGuru.Models
             Telemovel = telemovel;
         }
 
-        public Utilizador(int id, string nome, string email, string telemovel, List<string> historico, List<string> favoritos) : this(id, nome, email, telemovel)
+        public UtilizadorView(int id, string nome, string email, string telemovel, List<string> historico, List<string> favoritos) : this(id, nome, email, telemovel)
         {
             Historico = historico;
             Favoritos = favoritos;
