@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,36 @@ namespace SpotGuru.Controllers
             }
 
             return View(monumentos);
+        }
+
+        // Add Monumento
+        public async Task<IActionResult> AddFavorito(int? id)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Se já existir o monumento não o adiciona, e volta a listar os monumentos
+            if(_context.Favoritos.Any(e => e.Monumentos.Id == id && e.Utilizador.Id == userId))
+                return View("Index", await _context.Monumentos.ToListAsync());
+
+            Favoritos favoritos;
+            Monumentos monumentos = _context.Monumentos.Find(id);
+            Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
+
+            if (monumentos != null && user != null) 
+            {
+                favoritos = new Favoritos { Utilizador = user, Monumentos = monumentos };
+
+                _context.Favoritos.Add(favoritos); //TODO - Verificar se já foi adicionado anteriormente
+
+                await _context.SaveChangesAsync();
+            }
+
+            return View("Index", await _context.Monumentos.ToListAsync());
         }
 
         // GET: Monumentos/Create
