@@ -318,12 +318,13 @@ C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotG
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\SpotGuru.pdb
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\SpotGuru.genruntimeconfig.cache
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\SpotGuru.csproj.AssemblyReference.cache
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Create.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Delete.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Details.cshtml.g.cs
-C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\Edit.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Create.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Delete.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Details.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Edit.cshtml.g.cs
 C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Reviews2\Index.cshtml.g.cs
+C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Favoritos\Delete.cshtml.g.cs
+C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Favoritos\Details.cshtml.g.cs
+C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Favoritos\Index.cshtml.g.cs
+C:\Users\Utilizador\Documents\VisualStudioProjects\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Monumentos\AddReview.cshtml.g.cs

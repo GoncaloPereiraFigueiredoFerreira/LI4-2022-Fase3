@@ -36,7 +36,7 @@ namespace SpotGuru.Controllers
                 return NotFound();
             }
 
-            var monumentos = await _context.Monumentos
+            var monumentos = await _context.Monumentos.Include("Reviews")
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (monumentos == null)
             {
@@ -76,30 +76,9 @@ namespace SpotGuru.Controllers
             return View("Index", await _context.Monumentos.ToListAsync());
         }
 
-        // GET: Monumentos/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Monumentos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Descrição,Latitude,Longitude,Categoria")] Monumentos monumentos)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(monumentos);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(monumentos);
-        }
 
         // GET: Monumentos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> AddReview(int? id)
         {
             if (id == null)
             {
@@ -111,7 +90,7 @@ namespace SpotGuru.Controllers
             {
                 return NotFound();
             }
-            return View(monumentos);
+            return View();
         }
 
         // POST: Monumentos/Edit/5
@@ -119,63 +98,31 @@ namespace SpotGuru.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descrição,Latitude,Longitude,Categoria")] Monumentos monumentos)
+        public async Task<IActionResult> AddReview(int id, Review review)
         {
-            if (id != monumentos.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(monumentos);
+                    Review ret = new()
+                    {
+                        User = _context.Users.Find(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                        Monumentos = _context.Monumentos.Find(id),
+                        Comentario = review.Comentario,
+                        Classificacao = review.Classificacao
+                    };
+                    _context.Reviews.Add(ret);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MonumentosExists(monumentos.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
                     {
                         throw;
                     }
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(monumentos);
-        }
-
-        // GET: Monumentos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var monumentos = await _context.Monumentos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (monumentos == null)
-            {
-                return NotFound();
-            }
-
-            return View(monumentos);
-        }
-
-        // POST: Monumentos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var monumentos = await _context.Monumentos.FindAsync(id);
-            _context.Monumentos.Remove(monumentos);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
         private bool MonumentosExists(int id)
