@@ -45,14 +45,36 @@
             @{var url = "https://www.google.com/maps/place/" + Model.Latitude +","+ Model.Longitude;}
             <a href=@url>Obter direções</a>
         </dd>
-        @foreach (var item in Model.Reviews) {
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(m => item.Classificacao)
-        </dd>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(m => item.Comentario)
-        </dd>
-        }
+        <h4>Reviews</h4>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Username")
+            </th>
+            <th>
+                @Html.DisplayName("Classificacao")
+            </th>
+            <th>
+                @Html.DisplayName("Comentario")
+            </th>
+        </tr>
+    <tbody>
+@foreach (var item in Model.Reviews) {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Classificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Comentario)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
     </dl>
 </div>
 <div>
