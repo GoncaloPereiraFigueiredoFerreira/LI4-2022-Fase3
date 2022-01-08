@@ -36,7 +36,7 @@ namespace SpotGuru.Controllers
                 return NotFound();
             }
 
-            var monumentos = await _context.Monumentos.Include("Reviews")
+            var monumentos = await _context.Monumentos.Include("Reviews.User")
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (monumentos == null)
             {
@@ -100,7 +100,7 @@ namespace SpotGuru.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReview(int id, Review review)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && review.Classificacao >= 1 && review.Classificacao <= 5)
             {
                 try
                 {
@@ -121,6 +121,7 @@ namespace SpotGuru.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+
             }
             return View();
         }
