@@ -46,6 +46,24 @@ namespace SpotGuru.Controllers
             return View(monumentos);
         }
 
+        // GET: Monumentos/Horaio/5
+        public async Task<IActionResult> Horario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var monumentos = await _context.Monumentos.Include("Horario").FirstOrDefaultAsync(m => m.Id == id);
+            var horario = monumentos.Horario;
+            if (horario == null)
+            {
+                return NotFound();
+            }
+
+            return View(horario);
+        }
+
         // Add Monumento
         public async Task<IActionResult> AddFavorito(int? id)
         {
