@@ -38,10 +38,16 @@ namespace SpotGuru.Controllers
 
             var monumentos = await _context.Monumentos.Include("Reviews.User")
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (monumentos == null)
             {
                 return NotFound();
             }
+
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user      = await _context.Users.FindAsync(userId);
+            _context.Historico.Add(new Historico { Monumentos = monumentos, Utilizador = user });
+            await _context.SaveChangesAsync();
 
             return View(monumentos);
         }
