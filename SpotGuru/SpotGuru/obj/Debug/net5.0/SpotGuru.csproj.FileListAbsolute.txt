@@ -499,3 +499,6 @@ C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotG
 C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\ref\SpotGuru.dll
 C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\SpotGuru.pdb
 C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\SpotGuru.genruntimeconfig.cache
+C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Historico\Delete.cshtml.g.cs
+C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Historico\Details.cshtml.g.cs
+C:\Users\Acer\Source\Repos\GoncaloPereiraFigueiredoFerreira\LI4-2022-Fase3\SpotGuru\SpotGuru\obj\Debug\net5.0\Razor\Views\Historico\Index.cshtml.g.cs

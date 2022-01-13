@@ -13,6 +13,7 @@ namespace SpotGuru.Models
         public Horario Horario { get; set; }
         public List<Review> Reviews { get; set; }
 
+        public string pathFoto { get; set; }  
         public Monumentos()
         {
                 
