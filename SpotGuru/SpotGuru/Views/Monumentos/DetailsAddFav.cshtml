@@ -52,7 +52,6 @@
 
         <div> 
             <a asp-action="AddFavorito" asp-route-id="@Model.Id">Add To Favorites</a> |
-            <a asp-action="DeleteFavorito" asp-route-id="@Model.Id">Remove from Favorites</a> |
             <a asp-action="AddReview" asp-route-id="@Model.Id">Add review</a> |
             <a asp-action="Horario" asp-route-id="@Model.Id">Show Schedule</a> |
              @{var url = "https://www.google.com/maps/place/" + Model.Latitude.ToString().Replace(',','.') +","+ Model.Longitude.ToString().Replace(',','.');}

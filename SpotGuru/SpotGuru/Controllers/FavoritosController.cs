@@ -41,7 +41,7 @@ namespace SpotGuru.Controllers
             }
 
             var favoritos = await _context.Favoritos.Include("Monumentos").Include("Utilizador")
-                .FirstOrDefaultAsync(m => m.Id == id);
+                                                    .FirstOrDefaultAsync(m => m.Id == id);
 
             if (favoritos == null)
             {
@@ -51,7 +51,7 @@ namespace SpotGuru.Controllers
             _context.Historico.Add(new Historico { Monumentos = favoritos.Monumentos, Utilizador = favoritos.Utilizador });
             await _context.SaveChangesAsync();
 
-            return View(favoritos);
+            return RedirectToAction("Details", "Monumentos", new {@id=favoritos.Monumentos.Id});
         }
 
 
@@ -64,7 +64,7 @@ namespace SpotGuru.Controllers
             }
 
             var favoritos = await _context.Favoritos.Include("Monumentos")
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(fav => fav.Id == id);
 
             if (favoritos == null)
             {

@@ -49,8 +49,12 @@ namespace SpotGuru.Controllers
             _context.Historico.Add(new Historico { Monumentos = monumentos, Utilizador = user });
             await _context.SaveChangesAsync();
 
-            return View(monumentos);
+            if (alreadyAddToFavorites(id))
+                return View("DetailsRemFav", monumentos);
+            else
+                return View("DetailsAddFav", monumentos);
         }
+
 
         // GET: Monumentos/Horaio/5
         public async Task<IActionResult> Horario(int? id)
@@ -81,25 +85,51 @@ namespace SpotGuru.Controllers
             }
 
             //Se já existir o monumento não o adiciona, e volta a listar os monumentos
-            if(_context.Favoritos.Any(e => e.Monumentos.Id == id && e.Utilizador.Id == userId))
-                return View("Index", await _context.Monumentos.ToListAsync());
-
-            Favoritos favoritos;
-            Monumentos monumentos = _context.Monumentos.Find(id);
-            Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
-
-            if (monumentos != null && user != null) 
+            if (!_context.Favoritos.Any(e => e.Utilizador.Id == userId && e.Monumentos.Id == id))
             {
-                favoritos = new Favoritos { Utilizador = user, Monumentos = monumentos };
+                Favoritos favoritos;
+                Monumentos monumentos = _context.Monumentos.Find(id);
+                Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
 
-                _context.Favoritos.Add(favoritos); //TODO - Verificar se já foi adicionado anteriormente
+                if (monumentos != null && user != null)
+                {
+                    favoritos = new Favoritos { Utilizador = user, Monumentos = monumentos };
 
-                await _context.SaveChangesAsync();
+                    _context.Favoritos.Add(favoritos); //TODO - Verificar se já foi adicionado anteriormente
+
+                    await _context.SaveChangesAsync();
+                }
             }
 
-            return View("Index", await _context.Monumentos.ToListAsync());
+            return RedirectToAction("Details", "Monumentos", new { @id = id });
         }
 
+
+        // Remove Monument Favorite
+        public async Task<IActionResult> DeleteFavorito(int? id)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                Favoritos favoritos = _context.Favoritos.First(f => f.Utilizador.Id == userId && f.Monumentos.Id == id);
+
+                if (favoritos != null)
+                {
+                    _context.Favoritos.Remove(favoritos);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch(Exception ignored) { }
+
+
+            return RedirectToAction("Details", "Monumentos", new { @id = id });
+        }
 
         // GET: Monumentos/Edit/5
         public async Task<IActionResult> AddReview(int? id)
@@ -153,6 +183,15 @@ namespace SpotGuru.Controllers
         private bool MonumentosExists(int id)
         {
             return _context.Monumentos.Any(e => e.Id == id);
+        }
+
+        private bool alreadyAddToFavorites(int? id)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            if (id == null) return false;
+
+            return _context.Favoritos.Any(e => e.Utilizador.Id == userId && e.Monumentos.Id == id);
         }
     }
 }
