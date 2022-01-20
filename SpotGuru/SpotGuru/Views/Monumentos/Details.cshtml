@@ -42,7 +42,7 @@
             @Html.DisplayFor(model => model.Categoria)
         </dd>
         <dd class = "col-sm-10">
-            @{var url = "https://www.google.com/maps/place/" + Model.Latitude +","+ Model.Longitude;}
+            @{var url = "https://www.google.com/maps/place/" + Model.Latitude.ToString().Replace(',','.') +","+ Model.Longitude.ToString().Replace(',','.');}
             <a href=@url target="_blank">Obter direções</a>
         </dd>
         <h4>Reviews</h4>
