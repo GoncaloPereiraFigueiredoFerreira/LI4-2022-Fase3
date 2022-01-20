@@ -36,14 +36,38 @@ namespace SpotGuru.Controllers
                 return NotFound();
             }
 
-            var monumentos = await _context.Monumentos.Include("Reviews")
+            var monumentos = await _context.Monumentos.Include("Reviews.User")
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (monumentos == null)
             {
                 return NotFound();
             }
 
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user      = await _context.Users.FindAsync(userId);
+            _context.Historico.Add(new Historico { Monumentos = monumentos, Utilizador = user });
+            await _context.SaveChangesAsync();
+
             return View(monumentos);
+        }
+
+        // GET: Monumentos/Horaio/5
+        public async Task<IActionResult> Horario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var monumentos = await _context.Monumentos.Include("Horario").FirstOrDefaultAsync(m => m.Id == id);
+            var horario = monumentos.Horario;
+            if (horario == null)
+            {
+                return NotFound();
+            }
+
+            return View(horario);
         }
 
         // Add Monumento
@@ -100,7 +124,7 @@ namespace SpotGuru.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReview(int id, Review review)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && review.Classificacao >= 1 && review.Classificacao <= 5)
             {
                 try
                 {
@@ -121,6 +145,7 @@ namespace SpotGuru.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+
             }
             return View();
         }

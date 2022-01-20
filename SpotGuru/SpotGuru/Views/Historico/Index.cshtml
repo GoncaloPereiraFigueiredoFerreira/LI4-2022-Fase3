@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SpotGuru.Models.Historico>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <a asp-action="DeleteEntradasHistorico" asp-route-id=>Eliminar Histórico</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Monumentos.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monumentos.Descrição)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monumentos.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monumentos.Longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monumentos.Categoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monumentos.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monumentos.Descrição)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monumentos.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monumentos.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monumentos.Categoria)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

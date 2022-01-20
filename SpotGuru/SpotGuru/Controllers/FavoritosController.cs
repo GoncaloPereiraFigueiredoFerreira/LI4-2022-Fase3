@@ -27,7 +27,7 @@ namespace SpotGuru.Controllers
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            return View(await _context.Favoritos.Include("Monumentos").Include("Utilizador")
+            return View(await _context.Favoritos.Include("Monumentos")
                                       .Where(f => f.Utilizador.Id.Equals(userId))
                                       .ToListAsync());
         }
@@ -40,13 +40,16 @@ namespace SpotGuru.Controllers
                 return NotFound();
             }
 
-            var favoritos = await _context.Favoritos.Include("Monumentos")
+            var favoritos = await _context.Favoritos.Include("Monumentos").Include("Utilizador")
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (favoritos == null)
             {
                 return NotFound();
             }
+
+            _context.Historico.Add(new Historico { Monumentos = favoritos.Monumentos, Utilizador = favoritos.Utilizador });
+            await _context.SaveChangesAsync();
 
             return View(favoritos);
         }
@@ -82,6 +85,7 @@ namespace SpotGuru.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //TODO - n tem await
         private bool FavoritosExists(int id)
         {
             return _context.Favoritos.Any(e => e.Id == id);

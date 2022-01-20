@@ -7493,19 +7493,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Utilizador\\.nuget\\packages\\": {}
+    "C:\\Users\\Acer\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Utilizador\\Documents\\VisualStudioProjects\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
+      "projectUniqueName": "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
       "projectName": "SpotGuru",
-      "projectPath": "C:\\Users\\Utilizador\\Documents\\VisualStudioProjects\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
-      "packagesPath": "C:\\Users\\Utilizador\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Utilizador\\Documents\\VisualStudioProjects\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\obj\\",
+      "projectPath": "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
+      "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Utilizador\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7570,8 +7570,20 @@
         "warn": true,
         "downloadDependencies": [
           {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
             "name": "Microsoft.NETCore.App.Host.win-x64",
             "version": "[5.0.13, 5.0.13]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
           }
         ],
         "frameworkReferences": {
