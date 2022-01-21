@@ -1,4 +1,5 @@
 ﻿@model SpotGuru.Models.Favoritos
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 
 @{
     ViewData["Title"] = "Details";
@@ -10,42 +11,83 @@
 <div>
     <h4>Monumentos</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Monumentos.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Monumentos.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Monumentos.Descrição)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Monumentos.Descrição)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Monumentos.Latitude)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Monumentos.Latitude)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Monumentos.Longitude)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Monumentos.Longitude)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Monumentos.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Monumentos.Categoria)
-        </dd>
-        <dd class = "col-sm-10">
-            @{var url = "https://www.google.com/maps/place/" + Model.Monumentos.Latitude +","+ Model.Monumentos.Longitude;}
-            <a href=@url target="_blank">Obter direções</a>
-        </dd>
-    </dl>
+    <link rel="stylesheet" href="/css/monumentDetails.css" />
+    <div class="mon_details_section">
+        @{
+            string imagePath = "/images/monuments/" + Model.Monumentos.pathFoto;
+        }
+        <img class="img_mon_details" src=@imagePath alt="Not Found" />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Monumentos.Nome)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Monumentos.Nome)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Monumentos.Descrição)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Monumentos.Descrição)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Monumentos.Latitude)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Monumentos.Latitude)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Monumentos.Longitude)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Monumentos.Longitude)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Monumentos.Categoria)
+            </dt> 
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Monumentos.Categoria)
+            </dd>
+            <dd class = "col-sm-10">
+                @{var url = "https://www.google.com/maps/place/" + Model.Monumentos.Latitude.ToString().Replace(',','.') +","+ Model.Monumentos.Longitude.ToString().Replace(',','.');}
+                <a href=@url target="_blank">Obter direções</a>
+            </dd>
+        </dl>
+    </div>
+
+    <div>
+        <h4>Reviews</h4>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Username")
+                </th>
+                <th>
+                    @Html.DisplayName("Classificacao")
+                </th>
+                <th>
+                    @Html.DisplayName("Comentario")
+                </th>
+            </tr>
+        <tbody>
+
+        @foreach (var item in Model.Monumentos.Reviews) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.User.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Classificacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Comentario)
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
 </div>
 <div>
     <a asp-action="Delete" asp-route-id="@Model.Id">Delete Favorite</a> |

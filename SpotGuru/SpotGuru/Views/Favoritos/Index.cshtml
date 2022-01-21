@@ -5,52 +5,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Favoritos</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Descrição)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Longitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Categoria)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Descrição)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Longitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Categoria)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div>
+    <link rel="stylesheet" href="/css/monumentDetails.css" />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Monumentos.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Monumentos.Descrição)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Monumentos.Latitude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Monumentos.Longitude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Monumentos.Categoria)
+                </th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            @foreach (var item in Model) {
+                <tr class="mon_miniature_section">
+                    <td>
+                        <a asp-action="Details" asp-controller="Monumentos" asp-route-id="@item.Monumentos.Id">@Html.DisplayFor(modelItem => item.Monumentos.Nome)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monumentos.Descrição)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monumentos.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monumentos.Longitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monumentos.Categoria)
+                    </td>
+                    <td>
+                        @{
+                            string imagePath = "/images/monuments/" + item.Monumentos.pathFoto;
+                        }
+                    <img class="img_mon_miniature" src=@imagePath alt="Not Found" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

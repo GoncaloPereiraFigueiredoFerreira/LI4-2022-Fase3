@@ -36,7 +36,8 @@ namespace SpotGuru.Models
                     Categoria = Categorias.catedral,
                     Longitude = -8.377084,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "bomjesus.jpg"
                 };
                 Monumentos sameiro = new Monumentos
                 {
@@ -46,7 +47,8 @@ namespace SpotGuru.Models
                     Categoria = Categorias.catedral,
                     Longitude = -8.369686,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "santuariosameiro.jpg"
                 };
                 Monumentos ddiogo= new Monumentos
                 {
@@ -56,7 +58,8 @@ namespace SpotGuru.Models
                     Categoria = Categorias.museu,
                     Longitude = -8.427188,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "museudiogo.png"
                 };
                 Monumentos mSe = new Monumentos
                 {
@@ -66,7 +69,8 @@ namespace SpotGuru.Models
                     Latitude = 41.550393,
                     Longitude = -8.427576,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "museusebraga.jpg"
                 };
                 Monumentos montariol = new Monumentos
                 {
@@ -76,7 +80,8 @@ namespace SpotGuru.Models
                     Latitude = 41.569934,
                     Longitude = -8.410950,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "conventofran.jpg"
                 };
                 Monumentos saoVitor = new Monumentos
                 {
@@ -86,7 +91,8 @@ namespace SpotGuru.Models
                     Latitude = 41.553510,
                     Longitude = -8.413584,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "igrejasaovictor.jpg"
                 };
                 Monumentos palacioDoRaio = new Monumentos
                 {
@@ -96,7 +102,8 @@ namespace SpotGuru.Models
                     Latitude = 41.548886,
                     Longitude = -8.422631,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "palaciodoraio.jpg"
                 };
                 Monumentos biscainhos = new Monumentos
                 {
@@ -106,7 +113,8 @@ namespace SpotGuru.Models
                     Latitude = 41.551474,
                     Longitude = -8.429301,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "museubiscainhos.jpg"
                 };
                 Monumentos tibaes = new Monumentos
                 {
@@ -116,7 +124,8 @@ namespace SpotGuru.Models
                     Latitude = 41.556407,
                     Longitude = -8.478617,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "mosteriodetibaes.jpg"
                 };
                 Monumentos barbara = new Monumentos
                 {
@@ -126,7 +135,8 @@ namespace SpotGuru.Models
                     Latitude = 41.551520,
                     Longitude = -8.425855,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "jardimsantabarbara.jpg"
                 };
                 Monumentos paco = new Monumentos
                 {
@@ -136,7 +146,8 @@ namespace SpotGuru.Models
                     Latitude = 41.551064,
                     Longitude = -8.164455,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "pacosdoconselho.jpg"
                 };
                 Monumentos populo = new Monumentos
                 {
@@ -146,7 +157,8 @@ namespace SpotGuru.Models
                     Latitude = 41.551896,    
                     Longitude = -8.429268,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "igrejapopulo.jpg"
                 };
                 Monumentos palmeira = new Monumentos
                 {
@@ -156,7 +168,8 @@ namespace SpotGuru.Models
                     Latitude = 41.590084,
                     Longitude = -8.426753,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "igrejapalmeira.jpg"
                 };
                 Monumentos se = new Monumentos
                 {
@@ -166,7 +179,8 @@ namespace SpotGuru.Models
                     Latitude = 41.550234,
                     Longitude = -8.426991,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "sebraga.jpg"
                 };
                 Monumentos sntCruz = new Monumentos
                 {
@@ -176,7 +190,8 @@ namespace SpotGuru.Models
                     Latitude = 41.549541,
                     Longitude = -8.423975,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "igrejaSantaCruz.jpg"
                 };
                 Monumentos chafariz = new Monumentos
                 {
@@ -186,7 +201,8 @@ namespace SpotGuru.Models
                     Latitude = 41.551440,  
                     Longitude = -8.423092,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "chafarizPracaRepublica.jpg"
                 };
                 Monumentos congregados = new Monumentos
                 {
@@ -206,7 +222,8 @@ namespace SpotGuru.Models
                     Latitude  = 41.550441,
                     Longitude = -8.429299,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "arcoPortaNova.jpg"
                 };
                 context.Add(horario);
                 context.Add(bomJesus);
@@ -230,12 +247,7 @@ namespace SpotGuru.Models
 
 
                 context.SaveChanges();
-
-
             }
-            
-
-            
         }
     }
 }

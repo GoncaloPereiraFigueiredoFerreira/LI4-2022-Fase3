@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1>History</h1>
+
 <div>
     <a asp-action="DeleteEntradasHistorico" asp-route-id=>Eliminar Histórico</a>
 </div>
@@ -34,7 +36,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Nome)
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Monumentos.Nome)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Monumentos.Descrição)
@@ -49,7 +51,6 @@
                 @Html.DisplayFor(modelItem => item.Monumentos.Categoria)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

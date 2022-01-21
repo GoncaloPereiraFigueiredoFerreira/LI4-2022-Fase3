@@ -1,0 +1,34 @@
+﻿.img_mon_details {
+    width: auto;
+    height: 200px;
+    right: 0%;
+    position: absolute;
+}
+
+.mon_details_section {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: auto;
+    margin-bottom: auto;
+    height: auto;
+    width: auto;
+    position: relative;
+}
+
+.img_mon_miniature {
+    width: 60px;
+    height: 40px;
+    right: 0%;
+    position: absolute;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.mon_miniature_section {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 65px;
+    width: auto;
+    position: relative;
+}

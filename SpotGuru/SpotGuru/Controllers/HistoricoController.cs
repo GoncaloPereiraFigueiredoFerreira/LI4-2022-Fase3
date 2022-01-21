@@ -57,7 +57,6 @@ namespace SpotGuru.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Historico/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -76,8 +75,8 @@ namespace SpotGuru.Controllers
             _context.Historico.Add(new Historico { Monumentos = entradaHistorico.Monumentos, Utilizador = entradaHistorico.Utilizador });
             await _context.SaveChangesAsync();
 
-            return View(entradaHistorico);
-        }
+            return RedirectToAction("Details", "Monumentos", new { @id=entradaHistorico.Monumentos.Id});
+        } 
 
         // GET: Historico/Delete/5
         public async Task<IActionResult> Delete(int? id)
