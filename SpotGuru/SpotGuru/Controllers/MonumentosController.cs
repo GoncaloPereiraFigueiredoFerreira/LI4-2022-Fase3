@@ -5,10 +5,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SpotGuru.Data;
 using SpotGuru.Models;
+using SpotGuru.ViewModels;
 
 namespace SpotGuru.Controllers
 {
@@ -25,7 +25,9 @@ namespace SpotGuru.Controllers
         // GET: Monumentos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Monumentos.ToListAsync());
+            List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").ToListAsync();
+            List<MonumentosView> monsViews = mons.Select(x => new MonumentosView(x, getMonumentRating(x))).ToList();
+            return View(monsViews);
         }
 
         // GET: Monumentos/Details/5
@@ -49,10 +51,7 @@ namespace SpotGuru.Controllers
             _context.Historico.Add(new Historico { Monumentos = monumentos, Utilizador = user });
             await _context.SaveChangesAsync();
 
-            if (alreadyAddToFavorites(id))
-                return View("DetailsRemFav", monumentos);
-            else
-                return View("DetailsAddFav", monumentos);
+            return View(new MonumentosView(monumentos, getMonumentRating(monumentos), alreadyAddToFavorites(id)));
         }
 
 
@@ -192,6 +191,12 @@ namespace SpotGuru.Controllers
             if (id == null) return false;
 
             return _context.Favoritos.Any(e => e.Utilizador.Id == userId && e.Monumentos.Id == id);
+        }
+
+        private float getMonumentRating(Monumentos monumentos) {
+            int count = monumentos.Reviews.Count;
+            if (count == 0) return 0f;
+            return (float) monumentos.Reviews.Sum(r => r.Classificacao) / count;
         }
     }
 }

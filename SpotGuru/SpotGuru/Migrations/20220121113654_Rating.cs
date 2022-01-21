@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SpotGuru.Migrations
 {
-    public partial class newmig13 : Migration
+    public partial class Rating : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -168,6 +168,26 @@ namespace SpotGuru.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<short>(type: "smallint", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Monumentos",
                 columns: table => new
                 {
@@ -178,7 +198,8 @@ namespace SpotGuru.Migrations
                     Latitude = table.Column<double>(type: "float", nullable: false),
                     Longitude = table.Column<double>(type: "float", nullable: false),
                     Categoria = table.Column<int>(type: "int", nullable: false),
-                    HorarioId = table.Column<int>(type: "int", nullable: true)
+                    HorarioId = table.Column<int>(type: "int", nullable: true),
+                    pathFoto = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -278,7 +299,7 @@ namespace SpotGuru.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MonumentosId = table.Column<int>(type: "int", nullable: true),
-                    Comentario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Comentario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Classificacao = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -364,6 +385,11 @@ namespace SpotGuru.Migrations
                 column: "HorarioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Ratings_UserId",
+                table: "Ratings",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_MonumentosId",
                 table: "Reviews",
                 column: "MonumentosId");
@@ -406,6 +432,9 @@ namespace SpotGuru.Migrations
 
             migrationBuilder.DropTable(
                 name: "Historico");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

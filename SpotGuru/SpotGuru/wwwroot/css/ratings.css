@@ -1,0 +1,125 @@
+﻿.stars_section {
+    height: 150px;
+    width: 750px;
+    left: 0%;
+    position: relative;
+    background-image: url("/images/misc/EstrelaReviewEmpty.png");
+}
+
+.star_subsec_1 {
+    width: 150px;
+    height: 150px;
+    left: 0%;
+    position: absolute;
+}
+
+.star_subsec_1:hover {
+    width: 150px;
+    height: 150px;
+    left: 0%;
+    position: absolute;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.star_subsec_2 {
+    width: 150px;
+    height: 150px;
+    left: 20%;
+    position: absolute;
+    
+}
+
+.star_subsec_2:hover {
+    width: 300px;
+    height: 150px;
+    left: 0%;
+    position: absolute;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.star_subsec_3 {
+    width: 150px;
+    height: 150px;
+    left: 40%;
+    position: absolute;
+}
+
+.star_subsec_3:hover {
+    width: 450px;
+    height: 150px;
+    left: 0%;
+    position: absolute;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+
+.star_subsec_4 {
+    width: 150px;
+    height: 150px;
+    left: 60%;
+    position: absolute;
+}
+
+.star_subsec_4:hover {
+    width: 600px;
+    height: 150px;
+    left: 0%;
+    position: absolute;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.star_subsec_5 {
+    width: 150px;
+    height: 150px;
+    left: 80%;
+    position: absolute;
+}
+
+.star_subsec_5:hover {
+    width: 750px;
+    height: 150px;
+    left: 0%;
+    position: absolute;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+
+.stars_1 {
+    height: 150px;
+    width: 150px;
+    left: 0%;
+    position: relative;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.stars_2 {
+    height: 150px;
+    width: 300px;
+    left: 0%;
+    position: relative;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.stars_3 {
+    height: 150px;
+    width: 450px;
+    left: 0%;
+    position: relative;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.stars_4 {
+    height: 150px;
+    width: 600px;
+    left: 0%;
+    position: relative;
+    background-image: url("/images/misc/EstrelaReview.png");
+}
+
+.stars_5 {
+    height: 150px;
+    width: 750px;
+    left: 0%;
+    position: relative;
+    background-image: url("/images/misc/EstrelaReview.png");
+}

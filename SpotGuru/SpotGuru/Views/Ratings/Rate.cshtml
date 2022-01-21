@@ -1,0 +1,24 @@
+﻿@model SpotGuru.Models.Rating
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Rate Us</h1>
+<hr />
+<h4>Choose </h4>
+<hr />
+<link rel="stylesheet" href="/css/ratings.css" />
+
+<div class="stars_section">
+        <a href="@Url.Action("ChangeRate", "Ratings", new{value = 1})"><div class="star_subsec_1"></div> </a>
+        <a href="@Url.Action("ChangeRate", "Ratings", new{value = 2})"><div class="star_subsec_2"></div> </a>
+        <a href="@Url.Action("ChangeRate", "Ratings", new{value = 3})"><div class="star_subsec_3"></div> </a>
+        <a href="@Url.Action("ChangeRate", "Ratings", new{value = 4})"><div class="star_subsec_4"></div> </a>
+        <a href="@Url.Action("ChangeRate", "Ratings", new{value = 5})"><div class="star_subsec_5"></div> </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

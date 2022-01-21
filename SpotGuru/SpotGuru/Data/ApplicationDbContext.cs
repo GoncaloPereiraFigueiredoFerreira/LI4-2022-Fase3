@@ -19,12 +19,9 @@ namespace SpotGuru.Data
         public DbSet<Slots> Slots { get; set; }
         public DbSet<Favoritos> Favoritos { get; set; }
         public DbSet<Historico> Historico { get; set; }
-
-        }
-
-
-
-
+        public DbSet<Rating> Ratings { get; set; }
 
     }
+
+}
 

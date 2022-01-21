@@ -319,6 +319,26 @@ namespace SpotGuru.Migrations
                     b.ToTable("Monumentos");
                 });
 
+            modelBuilder.Entity("SpotGuru.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<short>("Value")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("SpotGuru.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -464,6 +484,15 @@ namespace SpotGuru.Migrations
                         .HasForeignKey("HorarioId");
 
                     b.Navigation("Horario");
+                });
+
+            modelBuilder.Entity("SpotGuru.Models.Rating", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SpotGuru.Models.Review", b =>

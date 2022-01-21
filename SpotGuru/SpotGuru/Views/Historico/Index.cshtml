@@ -8,26 +8,26 @@
 <h1>History</h1>
 
 <div>
-    <a asp-action="DeleteEntradasHistorico" asp-route-id=>Eliminar Histórico</a>
+    <a asp-action="DeleteEntradasHistorico" asp-route-id=>Delete History</a>
 </div>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Nome)
+                @Html.DisplayName("Name")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Descrição)
+                @Html.DisplayName("Description")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Latitude)
+                @Html.DisplayName("Latitude")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Longitude)
+                @Html.DisplayName("Longitude")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Monumentos.Categoria)
+                @Html.DisplayName("Category")
             </th>
             <th></th>
         </tr>
