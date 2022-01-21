@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SpotGuru.Models.Favoritos>
+﻿@using Helpers
+@model IEnumerable<SpotGuru.Models.Favoritos>
 
 @{
     ViewData["Title"] = "Index";
@@ -41,7 +42,7 @@
                         @Html.DisplayFor(modelItem => item.Monumentos.Longitude)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Monumentos.Categoria)
+                        @Html.DisplayName(EnumExtensionMethods.GetDescription(item.Monumentos.Categoria))
                     </td>
                     <td>
                         @{

@@ -1,12 +1,14 @@
-﻿namespace SpotGuru.Models
+﻿using System.ComponentModel;
+
+namespace SpotGuru.Models
 {
     public enum Categorias
     {
-        atração_turística=1, 
-        escultura=2, 
-        catedral =3, 
-        igreja = 4,
-        museu = 5, 
-        ponto_de_referencia_historico = 6
+        [Description("Tourist Attraction")] Tourist_Attraction = 1,
+        [Description("Sculpture")] Sculpture = 2,
+        [Description("Cathedral")] Cathedral = 3,
+        [Description("Church")] Church = 4,
+        [Description("Museum")] Museum = 5,
+        [Description("Historical Reference Point")] Historical_Reference_Point = 6
     }
 }
