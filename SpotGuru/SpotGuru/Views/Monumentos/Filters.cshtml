@@ -1,0 +1,78 @@
+﻿@using SpotGuru.Helpers
+@using SpotGuru.Models
+@{
+    ViewData["Title"] = "Filters";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Categorias> categorias = new List<Categorias>();
+    <link rel="stylesheet" href="/css/customCheckBox.css" />
+}
+
+<h1>Monumentos</h1>
+
+<h4>Filters</h4>
+
+<div>
+    <ul class="list-group" id="FiltersList">
+        @foreach (Categorias cat in Enum.GetValues(typeof(Categorias)).Cast<Categorias>())
+        {
+            <li class="list-group-item">
+                <label class="container">@EnumExtensionMethods.GetDescription(cat)
+                    <input type="checkbox" id=@cat>
+                    <span class="checkmark"></span>
+                </label>
+            </li>
+        }
+
+        <li class="list-group-item">
+            <button class="btn btn-sucess btn-block" onclick="SaveList()">Search</button>
+        </li>
+    </ul>
+    <!--<a asp-action="Index" asp-route-categories=@categorias>Search</a> -->
+</div>
+
+<script>
+    var SaveList = function() {
+        
+        var arr = [];
+        var commaSeparatedIds = "";
+
+        $("#FiltersList li input[type=checkbox]").each(function (index,val){
+
+            debugger
+
+            var id = $(val).attr("Id");
+            var isChecked = $("#" + id).is(":checked",true);
+            if(isChecked){
+                arr.push(id);
+            }
+        })
+
+        if(arr.length != 0){
+            
+            commaSeparatedIds = arr.toString();
+
+            const url = "/Monumentos/ApplyFilters?FiltersList=" + commaSeparatedIds;
+            location.href = url;
+
+            //window.location.href("/Monumentos/ApplyFilters?FiltersList="+commaSeparatedIds);
+            /*
+            $.ajax({
+                url: "/Monumentos/ApplyFilters",
+                type: "GET",
+                data: { FiltersList: commaSeparatedIds },
+                //sucess: function(response){
+                //    alert(response);
+                //},
+                sucess: function (data, textStatus, XMLHttpRequest) {
+                    // data is your HTML content
+                    $(this).html(data);
+                },
+                error: function () { alert('error'); }
+            })*/
+        }
+        else{
+            const url = "/Monumentos";
+            location.href = url;
+        }
+    }
+</script>
