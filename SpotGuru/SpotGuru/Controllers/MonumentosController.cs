@@ -49,7 +49,19 @@ namespace SpotGuru.Controllers
  
             List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").Where(mon => filtros.Contains(mon.Categoria)).ToListAsync();
             IEnumerable<MonumentosView> monsViews = getMonumentosViews(mons);
-            monsViews.ToList().ForEach(x => Console.WriteLine(x.Nome));
+            return View("Index", monsViews);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchMonumentByName(string name)
+        {
+            IEnumerable<MonumentosView> monsViews = new List<MonumentosView>();
+            try
+            {
+                Monumentos mon = await _context.Monumentos.Include("Reviews.User").FirstAsync(monDB => monDB.Nome.Equals(name));
+                ((List<MonumentosView>)monsViews).Add(new MonumentosView(mon, mon.getRating()));
+            }
+            catch (Exception ex) { }
             return View("Index", monsViews);
         }
 
@@ -61,20 +73,20 @@ namespace SpotGuru.Controllers
                 return NotFound();
             }
 
-            var monumentos = await _context.Monumentos.Include("Reviews.User")
+            var mon = await _context.Monumentos.Include("Reviews.User")
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (monumentos == null)
+            if (mon == null)
             {
                 return NotFound();
             }
 
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user      = await _context.Users.FindAsync(userId);
-            _context.Historico.Add(new Historico { Monumentos = monumentos, Utilizador = user });
+            _context.Historico.Add(new Historico { Monumentos = mon, Utilizador = user });
             await _context.SaveChangesAsync();
 
-            return View(new MonumentosView(monumentos, getMonumentRating(monumentos), alreadyAddToFavorites(id)));
+            return View(new MonumentosView(mon, mon.getRating(), alreadyAddToFavorites(id)));
         }
 
 
@@ -153,7 +165,6 @@ namespace SpotGuru.Controllers
             return RedirectToAction("Details", "Monumentos", new { @id = id });
         }
 
-        // GET: Monumentos/Edit/5
         public async Task<IActionResult> AddReview(int? id)
         {
             if (id == null)
@@ -169,9 +180,6 @@ namespace SpotGuru.Controllers
             return View();
         }
 
-        // POST: Monumentos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReview(int id, Review review)
@@ -216,15 +224,9 @@ namespace SpotGuru.Controllers
             return _context.Favoritos.Any(e => e.Utilizador.Id == userId && e.Monumentos.Id == id);
         }
 
-        private float getMonumentRating(Monumentos monumentos) {
-            int count = monumentos.Reviews.Count;
-            if (count == 0) return 0f;
-            return (float) monumentos.Reviews.Sum(r => r.Classificacao) / count;
-        }
-
         private IEnumerable<MonumentosView> getMonumentosViews(IEnumerable<Monumentos> mons)
         {
-            return mons.Select(x => new MonumentosView(x, getMonumentRating(x)));
+            return mons.Select(mon => new MonumentosView(mon, mon.getRating()));
         }
     }
 }

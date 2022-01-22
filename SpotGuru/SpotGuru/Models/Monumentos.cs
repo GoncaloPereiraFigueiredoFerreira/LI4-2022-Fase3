@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SpotGuru.Models
 {
@@ -12,7 +13,15 @@ namespace SpotGuru.Models
         public Categorias Categoria { get; set; }
         public Horario Horario { get; set; }
         public List<Review> Reviews { get; set; }
-        public string pathFoto { get; set; }  
+        public string pathFoto { get; set; }
+        
+        public float getRating()
+        {
+            int count = Reviews.Count;
+            if (count == 0) return 0f;
+            return (float) Reviews.Sum(r => r.Classificacao) / count;
+        }
+
         public Monumentos()
         {
                 

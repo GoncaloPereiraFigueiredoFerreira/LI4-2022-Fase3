@@ -3,31 +3,37 @@
 @{
     ViewData["Title"] = "Filters";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Categorias> categorias = new List<Categorias>();
     <link rel="stylesheet" href="/css/customCheckBox.css" />
 }
 
 <h1>Monumentos</h1>
 
-<h4>Filters</h4>
-
+<br />
+<h4>Search By Name</h4>
 <div>
-    <ul class="list-group" id="FiltersList">
-        @foreach (Categorias cat in Enum.GetValues(typeof(Categorias)).Cast<Categorias>())
-        {
-            <li class="list-group-item">
-                <label class="container">@EnumExtensionMethods.GetDescription(cat)
-                    <input type="checkbox" id=@cat>
-                    <span class="checkmark"></span>
-                </label>
-            </li>
-        }
+    <div class="form-group">
+        <input id="monumentName" class="form-control" />
+    </div>
+    <button class="button" onclick="SearchByName()">Search</button>
+</div>
 
-        <li class="list-group-item">
-            <button class="btn btn-sucess btn-block" onclick="SaveList()">Search</button>
-        </li>
-    </ul>
-    <!--<a asp-action="Index" asp-route-categories=@categorias>Search</a> -->
+<br />
+<h4>Search with Filters</h4>
+<div id="FiltersList">
+    @{
+        IEnumerable<Categorias> categorias = Enum.GetValues(typeof(Categorias)).Cast<Categorias>().OrderBy(cat => EnumExtensionMethods.GetDescription(cat));
+    }
+
+    @foreach (Categorias cat in categorias)
+    {
+        <label class="checkBoxContainer">@EnumExtensionMethods.GetDescription(cat)
+            <input type="checkbox" id=@cat>
+            <span class="checkmark"></span>
+        </label>
+    }
+
+    <button class="button" onclick="SaveList()">Search</button>
+
 </div>
 
 <script>
@@ -36,10 +42,7 @@
         var arr = [];
         var commaSeparatedIds = "";
 
-        $("#FiltersList li input[type=checkbox]").each(function (index,val){
-
-            debugger
-
+        $("#FiltersList label input[type=checkbox]").each(function (index,val){
             var id = $(val).attr("Id");
             var isChecked = $("#" + id).is(":checked",true);
             if(isChecked){
@@ -48,31 +51,18 @@
         })
 
         if(arr.length != 0){
-            
             commaSeparatedIds = arr.toString();
-
             const url = "/Monumentos/ApplyFilters?FiltersList=" + commaSeparatedIds;
             location.href = url;
-
-            //window.location.href("/Monumentos/ApplyFilters?FiltersList="+commaSeparatedIds);
-            /*
-            $.ajax({
-                url: "/Monumentos/ApplyFilters",
-                type: "GET",
-                data: { FiltersList: commaSeparatedIds },
-                //sucess: function(response){
-                //    alert(response);
-                //},
-                sucess: function (data, textStatus, XMLHttpRequest) {
-                    // data is your HTML content
-                    $(this).html(data);
-                },
-                error: function () { alert('error'); }
-            })*/
         }
         else{
             const url = "/Monumentos";
             location.href = url;
         }
+    }
+
+    var SearchByName = function(){
+        const url = "/Monumentos/SearchMonumentByName?name=" + document.getElementById("monumentName").value;
+        location.href = url;
     }
 </script>

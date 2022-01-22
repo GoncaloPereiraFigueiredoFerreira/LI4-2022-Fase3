@@ -33,7 +33,7 @@ namespace SpotGuru.Models
                     Nome = "Bom Jesus do Monte",
                     Descrição = "Located on the slopes of Mount Espinho, which dominates the city of Braga, in northern Portugal, this cultural landscape evokes Christian Jerusalem and reproduces a sacred mountain crowned with a church. Built over a period of more than 600 years, mainly in a Baroque style, the sanctuary illustrates the European tradition of the  Sacri Monti  (sacred mountains), promoted by the Catholic Church at the Council of Trent in the 16th century  , in reaction to the Protestant Reformation. The Bom Jesus ensemble is centered on a  Via Crucis  that runs along the western flank of Mt. It has a series of chapels that house sculptures evoking the Passion of Christ, fountains, allegorical sculptures and classical gardens. The  Via Crucisleads to the church, built between 1784 and 1811. The granite buildings have plastered, whitewashed facades framed by exposed stone masonry. The famous Staircase of the Five Senses, which features walls, steps, fountains, statues and other ornamental elements, is the most emblematic Baroque work within the property. They are framed by lush woods and surrounded by a picturesque park which, masterfully situated on the steep hill, strongly contributes to the landscape value of the whole. (source: UNESCO)",
                     Latitude = 41.554761,
-                    Categoria = Categorias.Cathedral,
+                    Categoria = Categorias.Sanctuary,
                     Longitude = -8.377084,
                     Horario = horario,
                     Reviews = new List<Review>(),
@@ -44,7 +44,7 @@ namespace SpotGuru.Models
                     Nome = "Santuario de Nossa Senhora do Sameiro",
                     Descrição = "The Sanctuary of Our Lady of Sameiro (or Sanctuary of Sameiro) is a sanctuary and Marian shrine located in Braga, in the surroundings of the city of Braga, Portugal. The Shrine of Our Lady of Sameiro is one of the places most visited Marian cult in Portugal, attracting many devotees every year during pilgrimages from 1st Sunday of June and the last Sunday of August. Its construction was initiated in s. XIX, by Father Martinho da Silva, in neoclassical style. Artistically not have much interest except the silver tabernacle that we can see on the main altar and the image of the patron saint, held in Rome by the sculptor Eugénio Maccagnani and brought to the sanctuary in 1880. But his visit is justified by the fact that we have here one of the most spacious panoramic Region, as the Shrine of Our Lady of Sameiro is 566 meters. Construction was begun on 14 July 1863 on the domed church of Nossa Senhora do Sameiro (Our Lady of Sameiro). The founder of the shrine was the Vicar of Braga, Padre Antonio Martinho Pereira da Silva. The sanctuary is the largest Marian devotional shrine in Portugal, second only to the Sanctuary of Fátima. Pope John Paul II visited this Marian shrine on May 15, 1982. (source: Itinari)",
                     Latitude = 41.542471,
-                    Categoria = Categorias.Cathedral,
+                    Categoria = Categorias.Sanctuary,
                     Longitude = -8.369686,
                     Horario = horario,
                     Reviews = new List<Review>(),
@@ -76,7 +76,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Convento Franciscano de Montariol",
                     Descrição = "No available description for this monument.",
-                    Categoria = Categorias.Museum,
+                    Categoria = Categorias.Convent,
                     Latitude = 41.569934,
                     Longitude = -8.410950,
                     Horario = horario,
@@ -87,7 +87,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Igreja de São Victor",
                     Descrição = "Baroque church dedicated to Saint Vincent of Zaragoza. It was built in the second half of the 16th century and is an example of the Baroque variety typical of Portugal. Its facade is decorated with stonework painting and is crowned with a stepped tympanum. Inside you can see carved altars and walls lined with azulejos.(source: Tropter)",
-                    Categoria = Categorias.Museum,
+                    Categoria = Categorias.Church,
                     Latitude = 41.553510,
                     Longitude = -8.413584,
                     Horario = horario,
@@ -120,7 +120,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Mosteiro de Tibães",
                     Descrição = "Monastery of saint Martin's church is located on the banks of the Cávado River, about 5 kilometers from the city center of Braga. The monastery known for its rich Rococo style decorations was erected in the 11th century during the fights of Christians with the Moors. Currently, there is a small historical museum inside the church.Immediately after its construction, the Monastery of St. Marcin's became one of the richest religious buildings in this part of the country. In 1567, the temple was chosen the seat of the Order of Saint Benedict. In the first half of the 17th century, the monks began a radical reconstruction, thanks to which the church gained its present shape.In 1757-1760, the main altar, side altars and pulpit were built in the church, which became characteristic elements of Portuguese Rococo art. The author of the works was André Soares, a leading Portuguese sculptor of the 17th century. In the monastery you can also admire the gilded woodwork by José de Santo António Vilaça and the statues of the famous sculptor named Cipriano da Cruz.(source: tropter)",
-                    Categoria = Categorias.Tourist_Attraction,
+                    Categoria = Categorias.Monastery,
                     Latitude = 41.556407,
                     Longitude = -8.478617,
                     Horario = horario,
@@ -131,7 +131,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Jardim de Santa Bárbara",
                     Descrição = "The colorful garden is directly adjacent to the medieval Archbishop's Palace. Discounts, boxwoods and avenues are arranged in geometric patterns. Stone arcades form one of the garden walls.(source: tropter)",
-                    Categoria = Categorias.Tourist_Attraction,
+                    Categoria = Categorias.TouristAttraction,
                     Latitude = 41.551520,
                     Longitude = -8.425855,
                     Horario = horario,
@@ -142,7 +142,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Paços do Concelho de Braga",
                     Descrição = "No available description.",
-                    Categoria = Categorias.Historical_Reference_Point,
+                    Categoria = Categorias.HistoricalReferencePoint,
                     Latitude = 41.551064,
                     Longitude = -8.164455,
                     Horario = horario,
@@ -153,7 +153,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Igreja do Pópulo",
                     Descrição = "The church was built in the 16th century as the tomb of Bishop Agostinho de Jesus. Initially, it had the features of Mannerist style, but in the 18th century it was rebuilt in the spirit of neoclassicism. Behind the façade decorated with columns and tymapnon is the interior lined with azulejos.(source: tropter)",
-                    Categoria = Categorias.Cathedral,
+                    Categoria = Categorias.Church,
                     Latitude = 41.551896,    
                     Longitude = -8.429268,
                     Horario = horario,
@@ -197,7 +197,7 @@ namespace SpotGuru.Models
                 {
                     Nome = "Chafariz da Praça da República",
                     Descrição = "No available description.",
-                    Categoria = Categorias.Tourist_Attraction,
+                    Categoria = Categorias.TouristAttraction,
                     Latitude = 41.551440,  
                     Longitude = -8.423092,
                     Horario = horario,
@@ -208,11 +208,12 @@ namespace SpotGuru.Models
                 {
                     Nome = "Basílica dos Congregados",
                     Descrição = "The baroque basilica, whose construction began at the beginning of the 18th century, lasted until the mid-20th century, when neo-rococo and neoclassical frescoes were made in the church. It is a three-nave building with an extensive, two-tower facade with numerous pilasters, cornices and other decorative elements. The interior is decorated with stone sculptures of saints, and the presbytery has a baroque high altar with the gilded Throne of the Blessed Sacrament.(tropter)",
-                    Categoria = Categorias.Cathedral,
+                    Categoria = Categorias.Basilica,
                     Latitude = 41.551123,
                     Longitude = -8.421345,
                     Horario = horario,
-                    Reviews = new List<Review>()
+                    Reviews = new List<Review>(),
+                    pathFoto = "basilicaCongregados.jpg"
                 };
                 Monumentos arco = new Monumentos
                 {
@@ -244,7 +245,6 @@ namespace SpotGuru.Models
                 context.Add(palacioDoRaio);
                 context.Add(biscainhos);
                 context.Add(tibaes);
-
 
                 context.SaveChanges();
             }

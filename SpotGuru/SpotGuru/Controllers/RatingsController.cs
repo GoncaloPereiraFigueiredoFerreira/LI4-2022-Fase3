@@ -154,9 +154,6 @@ namespace SpotGuru.Controllers
             int ratingSum = await _context.Ratings.SumAsync(r => r.Value);
             int numberRatings = await _context.Ratings.CountAsync();
             float RatingApp = (float) ratingSum/numberRatings;
-            Console.WriteLine("*************************************** SUM: " + ratingSum + " *****************************************");
-            Console.WriteLine("*************************************** Number: " + numberRatings + " *****************************************");
-            Console.WriteLine("*************************************** Rating: " + RatingApp + " *****************************************");
             try
             {
                 rating = await _context.Ratings.FirstAsync(r => r.User.Id == userId);
