@@ -30,4 +30,9 @@ namespace SpotGuru.Controllers
     {
         public float travelDistance { get; set; }
     }
+
+    public class IP
+    {
+        public string ip{ get; set; }
+    }
 }

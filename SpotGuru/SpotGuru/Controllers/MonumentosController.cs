@@ -36,7 +36,7 @@ namespace SpotGuru.Controllers
 
         public async Task<IActionResult> MonumentsSortedByDistance()
         {
-            var amonumentos = _context.Monumentos.ToListAsync();
+            var amonumentos = _context.Monumentos.Include("Reviews.User").ToListAsync();
 
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -65,7 +65,20 @@ namespace SpotGuru.Controllers
                     foreach (var dist in result.results)
                         distancias.Add(dist.travelDistance);
 
-            List<Monumentos> mons = await _context.Monumentos.ToListAsync();
+
+            for (int i = distancias.Count-1; i > 0; i--) {
+                int index = 0;
+                float maxDist = 0;
+                for (int j = 0; j <= i; j++) {
+                    if (distancias[j] > maxDist) { index = j;maxDist = distancias[j];}
+                }
+                distancias[index] = distancias[i];
+                Monumentos aux = monumentos[index];
+                monumentos[index] = monumentos[i];
+                monumentos[i] = aux;
+            }
+
+            var mons = getMonumentosViews(monumentos);
 
             return View("Index", mons);
         }
@@ -269,10 +282,16 @@ namespace SpotGuru.Controllers
             return mons.Select(mon => new MonumentosView(mon, mon.getRating()));
         }
 
-        private string GetIp()
+        private async Task<string> GetIpAsync()
         {
             var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            if (ip == "::1") ip = "5.249.28.39";
+            if (ip == "::1") {
+                client.DefaultRequestHeaders.Accept.Clear();
+
+                var streamTask = client.GetStreamAsync("https://api.ipify.org/?format=json");
+                var resorceSet = await JsonSerializer.DeserializeAsync<IP>(await streamTask);
+                ip = resorceSet.ip;
+            }
             return ip;
         }
 
@@ -280,7 +299,7 @@ namespace SpotGuru.Controllers
         {
             client.DefaultRequestHeaders.Accept.Clear();
 
-            var streamTask = client.GetStreamAsync("https://ipapi.co/" + GetIp() + "/json/");
+            var streamTask = client.GetStreamAsync("https://ipapi.co/" + await GetIpAsync() + "/json/");
             var resorceSet = await JsonSerializer.DeserializeAsync<Localizacao>(await streamTask);
 
             return resorceSet.latitude + "," + resorceSet.longitude;
