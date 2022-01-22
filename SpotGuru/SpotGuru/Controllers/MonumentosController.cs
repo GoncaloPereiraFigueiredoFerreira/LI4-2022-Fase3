@@ -26,33 +26,33 @@ namespace SpotGuru.Controllers
             _context = context;
         }
 
-        // GET: Monumentos
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string latitude, string longitude)
         {
             List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").ToListAsync();
-            IEnumerable<MonumentosView> monsViews = await loadMonumentosViewsDistances(mons);
+            IEnumerable<MonumentosView> monsViews = await loadMonumentosViewsDistances(mons, latitude, longitude);
             return View(monsViews);
         }
 
-        public async Task<IActionResult> MonumentsSortedByDistance()
+        public async Task<IActionResult> MonumentsSortedByDistance(string latitude, string longitude)
         {
             var monumentos = await _context.Monumentos.Include("Reviews.User").ToListAsync();
 
-            IEnumerable<MonumentosView> monsViews = await loadMonumentosViewsDistances(monumentos);
+            IEnumerable<MonumentosView> monsViews = await loadMonumentosViewsDistances(monumentos, latitude, longitude);
 
-            monsViews.OrderBy(monView => monView.distanceToUser);
+            monsViews = monsViews.OrderBy(monView => monView.distanceToUser);
             
-            return View("Index", monsViews);
+            return View(monsViews);
         }
 
         [HttpGet]
-        public IActionResult Filters()
+        public IActionResult Filters(bool sortByDistance)
         {
-            return View();
+            return View(sortByDistance);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ApplyFilters(string FiltersList)
+        public async Task<IActionResult> ApplyFilters(string FiltersList, bool sortByDistance, string latitude, string longitude)
         {
             string[] arr = FiltersList.Split(",");
             HashSet<Categorias> filtros = new HashSet<Categorias>();
@@ -63,12 +63,15 @@ namespace SpotGuru.Controllers
             }
  
             List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").Where(mon => filtros.Contains(mon.Categoria)).ToListAsync();
-            IEnumerable<MonumentosView> monsViews = await loadMonumentosViewsDistances(mons);
+            IEnumerable<MonumentosView> monsViews = await loadMonumentosViewsDistances(mons, latitude, longitude);
+
+            if (sortByDistance) monsViews = monsViews.OrderBy(monv => monv.distanceToUser);
+
             return View("Index", monsViews);
         }
 
         [HttpGet]
-        public async Task<IActionResult> SearchMonumentByName(string name)
+        public async Task<IActionResult> SearchMonumentByName(string name, string latitude, string longitude)
         {
             IEnumerable<MonumentosView> monsViews;
             try
@@ -76,7 +79,7 @@ namespace SpotGuru.Controllers
                 Monumentos mon = await _context.Monumentos.Include("Reviews.User").FirstAsync(monDB => monDB.Nome.Equals(name));
                 List<Monumentos> mons = new List<Monumentos>();
                 mons.Add(mon);
-                monsViews = await loadMonumentosViewsDistances(mons);
+                monsViews = await loadMonumentosViewsDistances(mons, latitude, longitude);
             }
             catch (Exception ex) { monsViews = new List<MonumentosView>();  }
             return View("Index", monsViews);
@@ -214,6 +217,7 @@ namespace SpotGuru.Controllers
                     };
                     _context.Reviews.Add(ret);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("Details", "Monumentos", new { @id = id });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -221,8 +225,6 @@ namespace SpotGuru.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-
             }
             return View();
         }
@@ -247,7 +249,7 @@ namespace SpotGuru.Controllers
         }
 
         //A partir de uma lista de monumentos, cria as views destes e carrega as respetivas distâncias ao utilizador
-        private async Task<List<MonumentosView>> loadMonumentosViewsDistances(IEnumerable<Monumentos> monumentos)
+        private async Task<List<MonumentosView>> loadMonumentosViewsDistances(IEnumerable<Monumentos> monumentos, string latitude, string longitude)
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -255,16 +257,17 @@ namespace SpotGuru.Controllers
             client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
 
             string url = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?";
-            string position = "origins=" + (await GetLocationAsync()) + "&";
+            string position = "origins=" + latitude.ToString().Replace(",", ".") + "," + longitude.ToString().Replace(",", ".") + "&";
             string destination = "destinations=";
             string final = "&travelMode=driving&key=ApOZlzALIbMO6O6upadu1XeDhNRxOeBLxO84vPgBZs10itB0A3fRKzbq4ppa1qoy";
 
             foreach (var monumento in monumentos)
-                destination = destination + monumento.Latitude + "," + monumento.Longitude + ";";
+                destination = destination + monumento.Latitude.ToString().Replace(",", ".") + "," + monumento.Longitude.ToString().Replace(",", ".") + ";";
 
             List<MonumentosView> monsViews = getMonumentosViews(monumentos);
 
-            try { 
+            try {
+                Console.WriteLine(url + position + destination.Remove(destination.Length - 1) + final);
                 var streamTask = client.GetStreamAsync(url + position + destination.Remove(destination.Length - 1) + final);
                 var resorceSet = await JsonSerializer.DeserializeAsync<Result>(await streamTask);
                 int monIndex = 0;
@@ -301,7 +304,7 @@ namespace SpotGuru.Controllers
             var streamTask = client.GetStreamAsync("https://ipapi.co/" + await GetIpAsync() + "/json/");
             var resorceSet = await JsonSerializer.DeserializeAsync<Localizacao>(await streamTask);
 
-            return resorceSet.latitude + "," + resorceSet.longitude;
+            return resorceSet.latitude.ToString().Replace(",",".") + "," + resorceSet.longitude.ToString().Replace(",", ".");
         }
     }
 }

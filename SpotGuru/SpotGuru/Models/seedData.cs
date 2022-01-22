@@ -143,8 +143,8 @@ namespace SpotGuru.Models
                     Nome = "Paços do Concelho de Braga",
                     Descrição = "No available description.",
                     Categoria = Categorias.HistoricalReferencePoint,
-                    Latitude = 41.551064,
-                    Longitude = -8.164455,
+                    Latitude = 41.551011,
+                    Longitude = -8.428384,
                     Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "pacosdoconselho.jpg"

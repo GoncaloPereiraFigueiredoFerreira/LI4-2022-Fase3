@@ -1,5 +1,7 @@
 ﻿@using SpotGuru.Helpers
 @using SpotGuru.Models
+@model bool
+
 @{
     ViewData["Title"] = "Filters";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -32,6 +34,16 @@
         </label>
     }
 
+    @if (Model)
+    {
+        <a id="sortBool" name="true"></a>
+    }
+    else
+    {
+        <a id="sortBool" name="false"></a>
+    }
+
+
     <button class="button" onclick="SaveList()">Search</button>
 
 </div>
@@ -52,17 +64,20 @@
 
         if(arr.length != 0){
             commaSeparatedIds = arr.toString();
-            const url = "/Monumentos/ApplyFilters?FiltersList=" + commaSeparatedIds;
-            location.href = url;
+            var sort = document.getElementById("sortBool");
+            const url = "/Monumentos/ApplyFilters?FiltersList=" + commaSeparatedIds + "&sortByDistance=" + $(sort).attr("name") + "&";
+            addLocationToUrl(url);
         }
         else{
-            const url = "/Monumentos";
-            location.href = url;
+            const url = "/Monumentos/Index?";
+            addLocationToUrl(url);
         }
     }
 
     var SearchByName = function(){
-        const url = "/Monumentos/SearchMonumentByName?name=" + document.getElementById("monumentName").value;
-        location.href = url;
+        const url = "/Monumentos/SearchMonumentByName?name=" + document.getElementById("monumentName").value + "&";
+        addLocationToUrl(url);
     }
 </script>
+
+<script src="~/scripts/geolocation.js"></script>
