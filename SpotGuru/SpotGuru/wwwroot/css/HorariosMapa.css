@@ -1,10 +1,20 @@
-﻿.container {
+﻿.indisponivel {
     display: block;
     position: relative;
+    height: 30px;
+    width: 150px;
+    background-color: #808080;
+    border: 1px solid #000;
+}
+.quadrado {
+    display: block;
+    position: relative;
+    cursor: pointer;
 }
 
-    .container input {
+    .quadrado input {
         position: relative;
+        cursor: pointer;
         opacity: 0;
         height: 0;
         width: 0;
@@ -20,6 +30,11 @@
     border: 1px solid #000;
 }
 
-.container input:checked ~ .checkmark {
+.quadrado input:checked ~ .checkmark {
     background-color: #f8c1b4;
+}
+
+/* On mouse-over, add a grey background color */
+.quadrado:hover input ~ .checkmark {
+    background-color: #ccc;
 }

@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Horarios\**" />
     <Compile Remove="Views\Reviews1\**" />
     <Compile Remove="Views\Reviews\**" />
+    <Content Remove="Views\Horarios\**" />
     <Content Remove="Views\Reviews1\**" />
     <Content Remove="Views\Reviews\**" />
+    <EmbeddedResource Remove="Views\Horarios\**" />
     <EmbeddedResource Remove="Views\Reviews1\**" />
     <EmbeddedResource Remove="Views\Reviews\**" />
+    <None Remove="Views\Horarios\**" />
     <None Remove="Views\Reviews1\**" />
     <None Remove="Views\Reviews\**" />
   </ItemGroup>
