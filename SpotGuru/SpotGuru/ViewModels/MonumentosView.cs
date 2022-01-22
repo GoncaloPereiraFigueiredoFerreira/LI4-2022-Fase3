@@ -18,7 +18,7 @@ namespace SpotGuru.ViewModels
         public string pathFoto { get; set; }
         public float Rating { get; set; }
         public bool isFavorite { get; set; } //Represent if the monument was added to the user's list of favorites
-
+        public float distanceToUser { get; set; }
         public MonumentosView() { }
 
         public MonumentosView(Monumentos monumentos, float rating)
