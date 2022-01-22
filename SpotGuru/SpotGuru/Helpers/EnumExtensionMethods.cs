@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Linq;
 
-namespace Helpers
+namespace SpotGuru.Helpers
 {
     /** 
      * @author: https://www.codingame.com/playgrounds/2487/c---how-to-display-friendly-names-for-enumerations

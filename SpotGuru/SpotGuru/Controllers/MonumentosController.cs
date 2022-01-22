@@ -26,8 +26,31 @@ namespace SpotGuru.Controllers
         public async Task<IActionResult> Index()
         {
             List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").ToListAsync();
-            List<MonumentosView> monsViews = mons.Select(x => new MonumentosView(x, getMonumentRating(x))).ToList();
+            IEnumerable<MonumentosView> monsViews = getMonumentosViews(mons);
             return View(monsViews);
+        }
+
+        [HttpGet]
+        public IActionResult Filters()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ApplyFilters(string FiltersList)
+        {
+            string[] arr = FiltersList.Split(",");
+            HashSet<Categorias> filtros = new HashSet<Categorias>();
+
+            foreach (string filter in arr)
+            {
+                filtros.Add((Categorias) Enum.Parse(typeof(Categorias), filter));
+            }
+ 
+            List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").Where(mon => filtros.Contains(mon.Categoria)).ToListAsync();
+            IEnumerable<MonumentosView> monsViews = getMonumentosViews(mons);
+            monsViews.ToList().ForEach(x => Console.WriteLine(x.Nome));
+            return View("Index", monsViews);
         }
 
         // GET: Monumentos/Details/5
@@ -197,6 +220,11 @@ namespace SpotGuru.Controllers
             int count = monumentos.Reviews.Count;
             if (count == 0) return 0f;
             return (float) monumentos.Reviews.Sum(r => r.Classificacao) / count;
+        }
+
+        private IEnumerable<MonumentosView> getMonumentosViews(IEnumerable<Monumentos> mons)
+        {
+            return mons.Select(x => new MonumentosView(x, getMonumentRating(x)));
         }
     }
 }
