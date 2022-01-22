@@ -262,20 +262,21 @@ namespace SpotGuru.Controllers
             foreach (var monumento in monumentos)
                 destination = destination + monumento.Latitude + "," + monumento.Longitude + ";";
 
-            Console.WriteLine(url + position + destination.Remove(destination.Length - 1) + final);
-            var streamTask = client.GetStreamAsync(url + position + destination.Remove(destination.Length - 1) + final);
-            var resorceSet = await JsonSerializer.DeserializeAsync<Result>(await streamTask);
-
             List<MonumentosView> monsViews = getMonumentosViews(monumentos);
-            int monIndex = 0;
 
-            foreach (var resorce in resorceSet.resourceSets)
-                foreach (var result in resorce.resources)
-                    foreach (var dist in result.results)
-                    {
-                        monsViews[monIndex].distanceToUser = dist.travelDistance;
-                        monIndex++;
-                    }
+            try { 
+                var streamTask = client.GetStreamAsync(url + position + destination.Remove(destination.Length - 1) + final);
+                var resorceSet = await JsonSerializer.DeserializeAsync<Result>(await streamTask);
+                int monIndex = 0;
+                foreach (var resorce in resorceSet.resourceSets)
+                    foreach (var result in resorce.resources)
+                        foreach (var dist in result.results)
+                        {
+                            monsViews[monIndex].distanceToUser = dist.travelDistance;
+                            monIndex++;
+                        }
+            }
+            catch(HttpRequestException hre) { }
 
             return monsViews;
         }
