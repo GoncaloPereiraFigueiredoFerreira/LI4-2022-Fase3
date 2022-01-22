@@ -1,4 +1,4 @@
-﻿using System.datetime;
+﻿using System;
 
 namespace SpotGuru.Models
 {
@@ -9,12 +9,12 @@ namespace SpotGuru.Models
         public DateTime HoraFinal { get; set; }
 
 
-        public Slots()
+        public SlotDisponivel()
         {
 
         }
 
-        public Slots(int id, DateTime horaI, DateTime horaF)
+        public SlotDisponivel(int id, DateTime horaI, DateTime horaF)
         {
             Id = id;
             HoraInicial = horaI;
@@ -22,4 +22,4 @@ namespace SpotGuru.Models
         }
     }
 }
-}
+
