@@ -1,17 +1,19 @@
-﻿namespace SpotGuru.Models
+﻿using System;
+
+namespace SpotGuru.Models
 {
     public class SlotsView
     {
         public int Id { get; set; }
-        public int Hora { get; set; }  
-        public int Dia { get; set; }
+        public DateTime HoraInicial { get; set; }  
+        public DateTime HoraFinal { get; set; }
         public int IdUtilizador { get; set; }
 
-        public SlotsView(int id, int hora, int dia, int idUtilizador)
+        public SlotsView(int id, DateTime horaI, DateTime horaF, int idUtilizador)
         {
             Id = id;
-            Hora = hora;
-            Dia = dia;
+            HoraInicial = horaI;
+            HoraFinal = horaF;
             IdUtilizador = idUtilizador;
         }
     }
