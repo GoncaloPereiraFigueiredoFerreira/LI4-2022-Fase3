@@ -34,11 +34,13 @@ namespace SpotGuru.ViewModels
             pathFoto = monumentos.pathFoto;
             Rating = rating;
             isFavorite = false;
+            distanceToUser = 0;
         }
 
         public MonumentosView(Monumentos monumentos, float rating, bool isFavorite) : this(monumentos, rating)
         {
             this.isFavorite = isFavorite;
+            distanceToUser = 0;
         }
 
         public MonumentosView(int id, string nome, string descrição, double latitude, double longitude, Categorias categoria, Horario horario, List<Review> reviews, string pathFoto, float rating)
@@ -53,6 +55,7 @@ namespace SpotGuru.ViewModels
             Reviews = reviews;
             this.pathFoto = pathFoto;
             Rating = rating;
+            distanceToUser = 0;
         }
     }
 }
