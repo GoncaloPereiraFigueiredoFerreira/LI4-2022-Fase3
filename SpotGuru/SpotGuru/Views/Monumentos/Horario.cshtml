@@ -61,48 +61,51 @@
             </tr>
         <tbody>
 
-        @for(var i = 0; i < 10; i++) {
+        @for(var i = Model.HoraAbertura; i < Model.HoraEncerrament ; i++) {
                 <tr>
                     <td>
+                        @TimeSpan.FromHours(i)
                         </td>
+                    @for(var dia = 0; i<7; i++)
+                    {
+                        //@if(Model.Get)
+                    } 
                     <td>
-                        <label class="container">One
+                       
+                        <label class="indisponivel"></label>
+                    </td>
+                    <td>
+                      <label class="quadrado">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         </label>
                     </td>
                     <td>
-                      <label class="container">One
+                        <label class="quadrado">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         </label>
                     </td>
                     <td>
-                        <label class="container">One
+                        <label class="quadrado">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         </label>
                     </td>
                     <td>
-                        <label class="container">One
+                        <label class="quadrado">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         </label>
                     </td>
                     <td>
-                        <label class="container">One
+                        <label class="quadrado">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         </label>
                     </td>
                     <td>
-                        <label class="container">One
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="container">One
+                        <label class="quadrado">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         </label>
