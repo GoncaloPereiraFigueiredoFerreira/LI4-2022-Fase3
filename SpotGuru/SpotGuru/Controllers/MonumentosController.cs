@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +19,7 @@ namespace SpotGuru.Controllers
     public class MonumentosController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private static readonly HttpClient client = new HttpClient();
 
         public MonumentosController(ApplicationDbContext context)
         {
@@ -28,6 +32,42 @@ namespace SpotGuru.Controllers
             List<Monumentos> mons = await _context.Monumentos.Include("Reviews.User").ToListAsync();
             IEnumerable<MonumentosView> monsViews = getMonumentosViews(mons);
             return View(monsViews);
+        }
+
+        public async Task<IActionResult> MonumentsSortedByDistance()
+        {
+            var amonumentos = _context.Monumentos.ToListAsync();
+
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+
+            string url = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?";
+            string position = "origins=" + (await GetLocationAsync()) + "&";
+            string destination = "destinations=";
+            string final = "&travelMode=driving&key=ApOZlzALIbMO6O6upadu1XeDhNRxOeBLxO84vPgBZs10itB0A3fRKzbq4ppa1qoy";
+
+            var monumentos = await amonumentos;
+
+            foreach (var monumento in monumentos)
+                destination = destination + monumento.Latitude + "," + monumento.Longitude + ";";
+
+            Console.WriteLine(url + position + destination.Remove(destination.Length - 1) + final);
+            var streamTask = client.GetStreamAsync(url + position + destination.Remove(destination.Length - 1) + final);
+            var resorceSet = await JsonSerializer.DeserializeAsync<Result>(await streamTask);
+
+
+            List<float> distancias = new List<float>();
+
+            foreach (var resorce in resorceSet.resourceSets)
+                foreach (var result in resorce.resources)
+                    foreach (var dist in result.results)
+                        distancias.Add(dist.travelDistance);
+
+            List<Monumentos> mons = await _context.Monumentos.ToListAsync();
+
+            return View("Index", mons);
         }
 
         [HttpGet]
@@ -227,6 +267,23 @@ namespace SpotGuru.Controllers
         private IEnumerable<MonumentosView> getMonumentosViews(IEnumerable<Monumentos> mons)
         {
             return mons.Select(mon => new MonumentosView(mon, mon.getRating()));
+        }
+
+        private string GetIp()
+        {
+            var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            if (ip == "::1") ip = "5.249.28.39";
+            return ip;
+        }
+
+        public async Task<string> GetLocationAsync()
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+
+            var streamTask = client.GetStreamAsync("https://ipapi.co/" + GetIp() + "/json/");
+            var resorceSet = await JsonSerializer.DeserializeAsync<Localizacao>(await streamTask);
+
+            return resorceSet.latitude + "," + resorceSet.longitude;
         }
     }
 }
