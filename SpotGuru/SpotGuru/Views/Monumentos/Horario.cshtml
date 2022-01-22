@@ -27,3 +27,88 @@
 <div>
     <a asp-action="Index">Back to Monuments</a>
 </div>
+
+<link rel="stylesheet" href="/css/HorariosMapa.css" />
+<div>
+        <h4>Horario</h4>
+
+        <table class="table">
+            <tr>
+                <th>
+                    -
+                </th>
+                <th>
+                    @Html.DisplayName("Monday")
+                </th>
+                <th>
+                    @Html.DisplayName("Tuesday")
+                </th>
+                <th>
+                    @Html.DisplayName("Wednesday")
+                </th>
+                <th>
+                    @Html.DisplayName("Thursday")
+                </th>
+                <th>
+                    @Html.DisplayName("Friday")
+                </th>
+                <th>
+                    @Html.DisplayName("Saturday")
+                </th>
+                <th>
+                    @Html.DisplayName("Sunday")
+                </th>
+            </tr>
+        <tbody>
+
+        @for(var i = 0; i < 10; i++) {
+                <tr>
+                    <td>
+                        </td>
+                    <td>
+                        <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                      <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="container">One
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        </label>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>

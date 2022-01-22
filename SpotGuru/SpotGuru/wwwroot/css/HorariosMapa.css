@@ -1,0 +1,25 @@
+﻿.container {
+    display: block;
+    position: relative;
+}
+
+    .container input {
+        position: relative;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 150px;
+    background-color: #dbf8b4;
+    border: 1px solid #000;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #f8c1b4;
+}
