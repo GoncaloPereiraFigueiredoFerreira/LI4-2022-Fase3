@@ -7,9 +7,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div id="corpo" onload="changeShape()">
 <h1>Monuments</h1>
+    
 
-<div>
     <h4>Details</h4>
     <hr />
     <link rel="stylesheet" href="/css/monumentDetails.css" />
@@ -17,7 +18,7 @@
         @{
             string imagePath = "/images/monuments/" + Model.pathFoto;
         }
-        <img class="img_mon_details" src=@imagePath alt="Not Found" />
+        <img id="monImg" class="img_mon_details" src=@imagePath alt="Not Found" />
         <dl class="row">
             <dt class = "col-sm-2">
                 @Html.DisplayName("Name")
@@ -111,4 +112,15 @@
             </tbody>
         </table>
     </div>
+
+
+
 </div>
+
+<script defer>
+            var elem = document.getElementById("corpo");
+            if(elem.offsetWidth < 720){
+                elem.classList.add("text-center");
+                document.getElementById("monImg").style.position = "relative";
+            }
+</script>

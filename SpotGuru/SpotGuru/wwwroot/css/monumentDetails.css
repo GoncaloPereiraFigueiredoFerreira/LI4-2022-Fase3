@@ -1,7 +1,7 @@
 ﻿.img_mon_details {
     top: 0%;
     right: 0%;
-    width: 360px;
+    width: 340px;
     height: 200px;
     position: absolute;
     object-fit: cover;
@@ -34,4 +34,12 @@
     height: 65px;
     width: auto;
     position: relative;
+}
+
+.img_min {
+    height: 37px;
+    width: 60px;
+    object-fit: cover;
+    object-position: center center;
+    overflow: hidden;
 }

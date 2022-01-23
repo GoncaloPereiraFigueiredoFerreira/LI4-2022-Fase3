@@ -18,28 +18,19 @@
                     @Html.DisplayName("Name")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Monumentos.Latitude)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Monumentos.Longitude)
-                </th>
-                <th>
                     @Html.DisplayName("Category")
+                </th>
+                <th>
+                    @Html.DisplayName("Photo")
                 </th>
             </tr>
         </thead>
     
         <tbody>
             @foreach (var item in Model) {
-                <tr class="mon_miniature_section">
+                <tr>
                     <td>
                         <a asp-action="Details" asp-controller="Monumentos" asp-route-id="@item.Monumentos.Id">@Html.DisplayFor(modelItem => item.Monumentos.Nome)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Monumentos.Latitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Monumentos.Longitude)
                     </td>
                     <td>
                         @Html.DisplayName(EnumExtensionMethods.GetDescription(item.Monumentos.Categoria))
@@ -48,7 +39,7 @@
                         @{
                             string imagePath = "/images/monuments/" + item.Monumentos.pathFoto;
                         }
-                    <img class="img_mon_miniature" src=@imagePath alt="Not Found" />
+                    <img class="img_min" src=@imagePath alt="Not Found" />
                     </td>
                 </tr>
             }
