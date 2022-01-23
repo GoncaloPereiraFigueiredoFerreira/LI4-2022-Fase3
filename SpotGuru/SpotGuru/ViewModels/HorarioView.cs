@@ -2,6 +2,7 @@
 using SpotGuru.Models;
 using System;
 using System.Collections.Generic;
+using SpotGuru.Helpers;
 
 namespace SpotGuru.ViewModels
 {
@@ -12,86 +13,41 @@ namespace SpotGuru.ViewModels
         public int HoraEncerramento { get; set; }
         public int DuracaoSlot { get; set; }
         public float CustoSlot { get; set; }
-
         public DateTime DiaAtual { get; set; }
-        public Dictionary<DateTime, Slots> SlotsDisponiveis { get; set; }
+        public Dictionary<int, Slots> SlotsOcupados { get; set; }
+        public IdentityUser Utilizador { get; set; }
 
-        public Dictionary<DateTime, Slots> SlotsOcupadosPeloUser { get; set; }
-
-        public Dictionary<DateTime, Slots> SlotsOcupadosPorOutros { get; set; }
-
-        public HorarioView(int id, int horaAbertura, int horaEncerramento, int duracaoSlot, float custoSlot, List<Slots> slots, IdentityUser user)
+        public HorarioView(Horario horario, IdentityUser user)
         {
-            DiaAtual = DateTime.Now.Date;
-            Id = id;
-            HoraAbertura = horaAbertura;
-            HoraEncerramento = horaEncerramento;
-            CustoSlot = custoSlot;
-            DuracaoSlot = duracaoSlot;
+            DiaAtual = DateTime.Today;
+            Id = horario.Id;
+            HoraAbertura = horario.HoraAbertura;
+            HoraEncerramento = horario.HoraEncerramento;
+            CustoSlot = horario.CustoSlot;
+            DuracaoSlot = horario.DuracaoSlot;
+            SlotsOcupados = new Dictionary<int, Slots>();
+            Utilizador = user;
 
-            SlotsDisponiveis = new Dictionary<DateTime, Slots>();
-            SlotsOcupadosPeloUser = new Dictionary<DateTime, Slots>();
-            SlotsOcupadosPorOutros = new Dictionary<DateTime, Slots>();
-
-            foreach (Slots s in slots)
-            {
-                IdentityUser utilizador = s.Utilizador;
-                if (utilizador == null)
-                {
-                    SlotsDisponiveis.Add(s.HoraInicial, s);
-                }
-                else if (utilizador.Equals(user))
-                {
-                    SlotsOcupadosPeloUser.Add(s.HoraInicial, s);
-                }
-                else
-                {
-                    SlotsOcupadosPorOutros.Add(s.HoraInicial, s);
-                }
-            }
+            horario.Slots.ForEach(s => {
+                int id = HorarioHelper.calculaId(DiaAtual, s.HoraInicial, HoraAbertura, HoraEncerramento, DuracaoSlot);  SlotsOcupados.TryAdd(id, s);
+                Console.WriteLine("Id: " + id + " | DiaAtual: " + DiaAtual + " | horaInicial: " + s.HoraInicial + " | horaAbertura: " + HoraAbertura + " | horaEnc: " + HoraEncerramento + " | Duracao: " + DuracaoSlot); 
+            });
         }
 
-        public IdPlusEstadoView slotDisponibilidade(int diaSemana, int HoraInicial)
+        //Return Values:
+        //  -> 1 - Disponivel
+        //  -> 2 - Ocupado pelo próprio utilizador
+        //  -> 3 - Ocupado por outros utilizadores
+        public int slotDisponibilidade(int idSlot)
         {
-            int diferencaDias = (int)DiaAtual.DayOfWeek - diaSemana;
-            if (diferencaDias < 0)
+            Slots slot = null;
+            
+            if (!SlotsOcupados.TryGetValue(idSlot, out slot)) return 1;
+            else
             {
-                diferencaDias = Math.Abs(diferencaDias) + (int)DiaAtual.DayOfWeek;
+                if (slot.Utilizador.Id == Utilizador.Id) return 2;
+                else return 3;
             }
-            DateTime dia = DiaAtual;
-            dia = dia.AddDays(diferencaDias);
-            dia = dia.AddHours(HoraInicial);
-
-            Slots s=null;
-            if (SlotsDisponiveis.TryGetValue(dia,out s))
-            {
-                return new IdPlusEstadoView
-                {
-                    Id= s.Id,
-                    Estado=1
-                };
-            }
-            if (SlotsOcupadosPeloUser.TryGetValue(dia, out s))
-            {
-                return new IdPlusEstadoView
-                {
-                    Id = s.Id,
-                    Estado = 2
-                };
-            }
-            if (SlotsOcupadosPorOutros.TryGetValue(dia, out s))
-            {
-                return new IdPlusEstadoView
-                {
-                    Id = s.Id,
-                    Estado = 3
-                };
-            }
-            return new IdPlusEstadoView
-            {
-                Id = -1,
-                Estado = 0
-            };
         }
     }
 }

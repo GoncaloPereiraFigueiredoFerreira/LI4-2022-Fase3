@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using SpotGuru.Data;
 using SpotGuru.Models;
 using SpotGuru.ViewModels;
+using SpotGuru.Helpers;
 
 namespace SpotGuru.Controllers
 {
@@ -131,7 +132,7 @@ namespace SpotGuru.Controllers
 
             var horario = monumentos.Horario;
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var horarioView = new HorarioView(idFixo, horario.HoraAbertura, horario.HoraEncerramento, horario.DuracaoSlot, horario.CustoSlot, horario.Slots, await _context.Users.FindAsync(userId));
+            var horarioView = new HorarioView(horario, await _context.Users.FindAsync(userId));
             if (horarioView == null)
             {
                 return NotFound();
@@ -140,7 +141,7 @@ namespace SpotGuru.Controllers
         }
 
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IActionResult> FazReserva(int? idHorario, int id)
         {
             Console.WriteLine("idHorario: " + idHorario);
@@ -164,6 +165,57 @@ namespace SpotGuru.Controllers
                 slot.Utilizador = user;
                 _context.Slots.Update(slot);
                 await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Horario", new { @id = idHorario });
+        }*/
+
+        [HttpGet]
+        public async Task<IActionResult> handleSlot(int? idHorario, int id)
+        {
+            Console.WriteLine("IdSlot: " + id);
+
+            //Verifica se o horario existe, caso não exista, apresenta a página NotFound
+            Horario horario;
+
+            if (idHorario == null) return NotFound();
+
+            try { 
+                horario = await _context.Horario.FirstAsync(h => h.Id == idHorario);
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+
+            //Encontra-se o utilizador da sessão para verificar se a slot (caso exista), lhe pertence, podendo assim anular a reserva.
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
+
+            //calcula a data a que o id corresponde
+            DateTime data = HorarioHelper.calculaDiaEHora(id, horario.HoraAbertura, horario.HoraEncerramento, horario.DuracaoSlot, DateTime.Today);
+            Console.WriteLine("IdSlot: " + id + "    | Data: " + data.ToString());
+
+            try 
+            {
+                Slots slot = _context.Slots.Include("Utilizador").First(S => S.Horario.Id == idHorario && S.HoraInicial.Equals(data));
+
+                //Se a slot pertencer ao utilizador, entende-se que a intenção é remover a reserva
+                //Apenas pode remover com 24 horas de antecedencia
+                if (slot.Utilizador.Id == userId && data.Subtract(DateTime.Now).Days >= 1)
+                {
+                    _context.Slots.Remove(slot);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                //Se não existir um slot para essa data
+                if (DateTime.Now.CompareTo(data) < 0 && data.Hour >= horario.HoraAbertura && data.Hour <= horario.HoraEncerramento)
+                {
+                    _context.Slots.Add(new Slots { Horario = horario, Utilizador = user, HoraInicial = data });
+                    await _context.SaveChangesAsync();
+                }
             }
 
             return RedirectToAction("Horario", new { @id = idHorario });

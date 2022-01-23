@@ -2,21 +2,26 @@
 {
     public class HorarioHelper
     {
-        public static System.DateTime calculaDiaEHora(int id, int duracaoSlot, int horaAbertura, int horaFecho, System.DateTime diaAtual)
+        //Assume dia atual com todos os parametros a 0, excepto o dia, mes e ano
+        public static System.DateTime calculaDiaEHora(int id, int horaAbertura, int horaFecho, int duracaoSlot, System.DateTime diaAtual)
         {
             int tempo = id * duracaoSlot;
-            int dia = tempo / ((horaFecho - horaAbertura) * 60);
-            int nrSlotNoDia = (tempo % ((horaFecho - horaAbertura) * 60)) / duracaoSlot;
-            System.DateTime date = new System.DateTime(diaAtual.Year,diaAtual.Month,diaAtual.Day).AddDays(dia).AddMinutes(nrSlotNoDia * duracaoSlot);
+            int minsPorDia = (horaFecho - horaAbertura) * 60;
+            int dia = tempo / minsPorDia;
+            int nrSlotNoDia = (tempo % minsPorDia) / duracaoSlot;
+            System.DateTime date = diaAtual.AddDays(dia).AddHours(horaAbertura).AddMinutes(nrSlotNoDia * duracaoSlot);
             return date;
             //Fazer a verificacao abaixo ao inserir na DB
             //if (date.Hour >= horaAbertura && date.Hour <= horaFecho)
         }
 
-        //Assume dia atual com todos os parametros a 0, excepto o dia, mes e ano
-        public static int calculaId(System.DateTime diaAtual)
+        //Assume todos os parametros a 0, excepto o dia, mes e ano, para o argumento diaInicioSemana
+        public static int calculaId(System.DateTime diaInicioSemana, System.DateTime diaSlot, int horaAbertura, int horaFecho, int duracaoSlot)
         {
-            return 0;
+            int nrSlotsNoDia = (diaSlot.Hour * 60 + diaSlot.Minute - horaAbertura * 60) / duracaoSlot;
+            int dia = diaSlot.Day - diaInicioSemana.Day;
+            int nrSlotsMaxDia = ((horaFecho - horaAbertura) * 60) / duracaoSlot;
+            return dia * nrSlotsMaxDia + nrSlotsNoDia;
         }
     }
 }

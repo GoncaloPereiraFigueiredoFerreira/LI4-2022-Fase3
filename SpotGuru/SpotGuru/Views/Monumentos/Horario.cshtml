@@ -28,9 +28,9 @@
 
 <link rel="stylesheet" href="/css/HorariosMapa.css" />
 <div>
-        <h4>Horario</h4>
+    <h4>Horario</h4>
 
-        <table class="table">
+    <table class="table">
             <tr>
                 <th>
                     Inicio
@@ -42,65 +42,55 @@
                 }
             </tr>
         <tbody>
-
-        @for(var i = Model.HoraAbertura; i < Model.HoraEncerramento ; i++) {
+            @for(int i = Model.HoraAbertura; i*Model.DuracaoSlot < Model.HoraEncerramento*Model.DuracaoSlot; i++) {
                 <tr>
                     <td>
-                        @TimeSpan.FromMinutes(i*60 + Model.DuracaoSlot)
+                        @TimeSpan.FromMinutes(i*Model.DuracaoSlot)
                     </td>
                     
-                    @{
-                        for(var dia = 0; dia < 7; dia++)
-                        {
-                            IdPlusEstadoView ipe = Model.slotDisponibilidade(dia,i);
-                            switch(ipe.Estado)
+                    @for(int dia = 0; dia < 7; dia++)
+                    {
+                        int id = ((i - Model.HoraAbertura) - 1 + ((dia * (Model.HoraEncerramento * Model.DuracaoSlot - Model.HoraAbertura * Model.DuracaoSlot) / Model.DuracaoSlot) + 1));
+                        int estado = Model.slotDisponibilidade(id);
+                        switch(estado)
                             {
                                 case 1:
-                                    <td>
+                                    <td class="text-center">
                                         <label class="quadrado">
-                                            <input type="checkbox" onclick="FazReserva(id='@ipe.Id')"> 
+                                            <input type="checkbox" onclick="HandleSlot(id='@id')"> 
                                             <span class="checkmark"></span>
                                         </label>
                                     </td>
                                     break;
                                 case 2:
-                                    <td>
+                                    <td class="text-center">
                                         <label class="quadrado">
-                                        <input type="checkbox" checked="checked">
+                                        <input type="checkbox" onclick="HandleSlot(id='@id')" checked="checked" >
                                         <span class="checkmark"></span>
                                         </label>
                                     </td>
                                     break;
                                 case 3:
-                                    <td>
+                                    <td class="text-center">
                                         <label class="ocupado"></label>
                                     </td>
                                     break;
                                 default:
-                                    <td>
+                                    <td class="text-center">
                                         <label class="indisponivel"></label>
                                     </td>
                                     break;
-                            }
                         }
                     }
                 </tr>
-        }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>
 
-    <script>
-        var FazReserva = function(id){
 
-            location.href= "/Monumentos/FazReserva?idHorario=" + @Model.Id + "&id=" + id;
-            /*
-            $.ajax({
-                url: "/Monumentos/FazReserva",
-                type: "POST",
-                data: {Id: id}
-            })
-            */
-        }
-
-    </script>
+<script>
+    var HandleSlot = function(id){
+        location.href= "/Monumentos/handleSlot?idHorario=" + @Model.Id + "&id=" + id;
+    }
+</script>
