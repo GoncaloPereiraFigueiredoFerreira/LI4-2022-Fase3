@@ -1,27 +1,30 @@
 ﻿.img_mon_details {
-    width: auto;
-    height: 200px;
+    top: 0%;
     right: 0%;
+    width: 340px;
+    height: 200px;
     position: absolute;
+    object-fit: cover;
+    object-position: center center;
+    overflow: hidden;
+    background-repeat: no-repeat;
 }
 
 .mon_details_section {
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-left: auto;
-    margin-bottom: auto;
+    margin: 0;
     height: auto;
     width: auto;
     position: relative;
 }
 
 .img_mon_miniature {
+    right: 0%;
     width: 60px;
     height: 40px;
-    right: 0%;
     position: absolute;
-    background-position: center;
-    background-size: 100%;
+    object-fit: cover;
+    object-position: center center;
+    overflow: hidden;
     background-repeat: no-repeat;
 }
 
@@ -31,4 +34,12 @@
     height: 65px;
     width: auto;
     position: relative;
+}
+
+.img_min {
+    height: 37px;
+    width: 60px;
+    object-fit: cover;
+    object-position: center center;
+    overflow: hidden;
 }

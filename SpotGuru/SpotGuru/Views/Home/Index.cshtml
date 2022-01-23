@@ -2,14 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="container text-center">
     <h1 class="display-4">Welcome Human</h1>
-    <img src="/images/misc/SpotGuru.png" alt="Not Found" height="500" width="500">
 
-<p>Click the button to list monuments nearby.</p>
+    <img src="/images/misc/SpotGuru.png" alt="Not Found" style="padding: 1rem; max-width:fit-content; width: inherit; object-fit: cover; object-position: center center;">
 
-<button onclick="addLocationToUrl(url='Monumentos/MonumentsSortedByDistance?')">Click me</button>
+    <p>Click the button to list monuments nearby.</p>
 
-<p id="demo"></p>
+    <button onclick="addLocationToUrl(url='Monumentos/MonumentsSortedByDistance?')">Click me</button>
 </div>
 <script src="~/scripts/geolocation.js"></script>

@@ -6,6 +6,15 @@
     background-color: #808080;
     border: 1px solid #000;
 }
+
+.ocupado {
+    display: block;
+    position: relative;
+    height: 30px;
+    width: 150px;
+    background-color: #ff0000;
+    border: 1px solid #000;
+}
 .quadrado {
     display: block;
     position: relative;

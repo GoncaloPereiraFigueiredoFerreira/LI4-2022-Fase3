@@ -12,43 +12,43 @@
     <a asp-action="DeleteEntradasHistorico" asp-route-id=>Delete History</a>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Name")
-            </th>
-            <th>
-                @Html.DisplayName("Latitude")
-            </th>
-            <th>
-                @Html.DisplayName("Longitude")
-            </th>
-            <th>
-                @Html.DisplayName("Category")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+<div>
+    <link rel="stylesheet" href="/css/monumentDetails.css" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Category")
+                </th>
+                <th>
+                    @Html.DisplayName("Photo")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Monumentos.Nome)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monumentos.Longitude)
-            </td>
-            <td>
-                @Html.DisplayName(EnumExtensionMethods.GetDescription(item.Monumentos.Categoria))
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Monumentos.Nome)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayName(EnumExtensionMethods.GetDescription(item.Monumentos.Categoria))
+                    </td>
+                    <td>
+                        @{
+                            string imagePath = "/images/monuments/" + item.Monumentos.pathFoto;
+                        }
+                        <img class="img_min" src=@imagePath alt="Not Found" /> 
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+        }
+        </tbody>
+    </table>
+</div>

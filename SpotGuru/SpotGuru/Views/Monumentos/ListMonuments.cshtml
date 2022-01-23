@@ -20,7 +20,9 @@
                 <th>
                     @Html.DisplayName("Distance")
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayName("Photo")
+                </th>
             </tr>
         </thead>
     
@@ -40,11 +42,11 @@
                     <td>
                         @Html.DisplayName(String.Format("{0:0.00} {1}",item.distanceToUser,"Km"))
                     </td>
-                    <td class="mon_miniature_section">
+                    <td>
                         @{
                             string imagePath = "/images/monuments/" + item.pathFoto;
                         }
-                        <img class="img_mon_miniature" src=@imagePath alt="Not Found" />
+                         <img class="img_min" src=@imagePath alt="Not Found" /> 
                     </td>
                 </tr>
             }

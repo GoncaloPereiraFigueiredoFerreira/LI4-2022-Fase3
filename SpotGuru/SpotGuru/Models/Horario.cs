@@ -13,7 +13,7 @@ namespace SpotGuru.Models
 
         public Horario()
         {
-
+            Slots=new List<Slots>();
         }
         public Horario(int id, int horaAbertura, int horaEncerrament, float custoSlot, List<Slots> slots)
         {

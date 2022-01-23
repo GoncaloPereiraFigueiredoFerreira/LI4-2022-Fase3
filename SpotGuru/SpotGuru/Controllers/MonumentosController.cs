@@ -109,7 +109,6 @@ namespace SpotGuru.Controllers
             return View(new MonumentosView(mon, mon.getRating(), alreadyAddToFavorites(id)));
         }
 
-
         // GET: Monumentos/Horaio/5
         public async Task<IActionResult> Horario(int? id)
         {
@@ -117,15 +116,18 @@ namespace SpotGuru.Controllers
             {
                 return NotFound();
             }
+            int idFixo = id.GetValueOrDefault();
 
             var monumentos = await _context.Monumentos.Include("Horario").FirstOrDefaultAsync(m => m.Id == id);
             var horario = monumentos.Horario;
-            if (horario == null)
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var horarioView = new HorarioView(idFixo,horario.HoraAbertura,horario.HoraEncerrament,horario.CustoSlot, horario.Slots, await _context.Users.FindAsync(userId));
+            if (horarioView == null)
             {
                 return NotFound();
             }
 
-            return View(horario);
+            return View(horarioView);
         }
 
         // Add Monumento
