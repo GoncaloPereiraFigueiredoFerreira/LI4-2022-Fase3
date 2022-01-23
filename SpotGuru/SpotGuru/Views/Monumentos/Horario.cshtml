@@ -1,4 +1,4 @@
-﻿@model SpotGuru.Models.Horario
+﻿@model SpotGuru.ViewModels.HorarioView
 
 <div>
     <h4>Schedule</h4>
@@ -24,9 +24,6 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Index">Back to Monuments</a>
-</div>
 
 <link rel="stylesheet" href="/css/HorariosMapa.css" />
 <div>
@@ -35,7 +32,10 @@
         <table class="table">
             <tr>
                 <th>
-                    -
+                    Inicio
+                </th>
+                <th>
+                    @Html.DisplayName("Sunday")
                 </th>
                 <th>
                     @Html.DisplayName("Monday")
@@ -55,9 +55,6 @@
                 <th>
                     @Html.DisplayName("Saturday")
                 </th>
-                <th>
-                    @Html.DisplayName("Sunday")
-                </th>
             </tr>
         <tbody>
 
@@ -66,50 +63,41 @@
                     <td>
                         @TimeSpan.FromHours(i)
                         </td>
-                    @for(var dia = 0; i<7; i++)
-                    {
-                        //@if(Model.Get)
-                    } 
-                    <td>
-                       
-                        <label class="indisponivel"></label>
-                    </td>
-                    <td>
-                      <label class="quadrado">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="quadrado">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="quadrado">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="quadrado">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="quadrado">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="quadrado">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        </label>
-                    </td>
+                    
+                    @{
+                        for(var dia = 0; dia<7; dia++)
+                        {
+                            switch(Model.slotDisponibilidade(dia,i))
+                            {
+                                case 1:
+                                    <td>
+                                        <label class="quadrado">
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </td>
+                                    break;
+                                case 2:
+                                    <td>
+                                        <label class="quadrado">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                        </label>
+                                    </td>
+                                    break;
+                                case 3:
+                                    <td>
+                                        <label class="ocupado"></label>
+                                    </td>
+                                    break;
+                                default:
+                                    <td>
+                                        <label class="indisponivel"></label>
+                                    </td>
+                                    break;
+                            }
+                        }
+                    }
                 </tr>
         }
             </tbody>
