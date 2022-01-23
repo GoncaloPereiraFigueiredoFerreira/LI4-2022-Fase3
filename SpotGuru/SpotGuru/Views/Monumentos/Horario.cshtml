@@ -12,10 +12,10 @@
             @Html.DisplayFor(model => model.HoraAbertura)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HoraEncerrament)
+            @Html.DisplayNameFor(model => model.HoraEncerramento)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HoraEncerrament)
+            @Html.DisplayFor(model => model.HoraEncerramento)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CustoSlot)
@@ -35,38 +35,22 @@
                 <th>
                     Inicio
                 </th>
-                <th>
-                    @Html.DisplayName("Sunday")
-                </th>
-                <th>
-                    @Html.DisplayName("Monday")
-                </th>
-                <th>
-                    @Html.DisplayName("Tuesday")
-                </th>
-                <th>
-                    @Html.DisplayName("Wednesday")
-                </th>
-                <th>
-                    @Html.DisplayName("Thursday")
-                </th>
-                <th>
-                    @Html.DisplayName("Friday")
-                </th>
-                <th>
-                    @Html.DisplayName("Saturday")
-                </th>
+                @for(int i = 0; i < 7; i++){
+                    <th class="text-center">
+                        @Html.DisplayName(Model.DiaAtual.AddDays(i).DayOfWeek.ToString())
+                    </th>
+                }
             </tr>
         <tbody>
 
-        @for(var i = Model.HoraAbertura; i < Model.HoraEncerrament ; i++) {
+        @for(var i = Model.HoraAbertura; i < Model.HoraEncerramento ; i++) {
                 <tr>
                     <td>
-                        @TimeSpan.FromHours(i)
-                        </td>
+                        @TimeSpan.FromMinutes(i*60 + Model.DuracaoSlot)
+                    </td>
                     
                     @{
-                        for(var dia = 0; dia<7; dia++)
+                        for(var dia = 0; dia < 7; dia++)
                         {
                             IdPlusEstadoView ipe = Model.slotDisponibilidade(dia,i);
                             switch(ipe.Estado)
@@ -74,7 +58,7 @@
                                 case 1:
                                     <td>
                                         <label class="quadrado">
-                                            <input type="checkbox" onclick="FazReserva()"> 
+                                            <input type="checkbox" onclick="FazReserva(id='@ipe.Id')"> 
                                             <span class="checkmark"></span>
                                         </label>
                                     </td>
@@ -107,9 +91,9 @@
     </div>
 
     <script>
-        var FazReserva = function(){
+        var FazReserva = function(id){
 
-            location.href= "/Monumentos/FazReserva?id=3";
+            location.href= "/Monumentos/FazReserva?idHorario=" + @Model.Id + "&id=" + id;
             /*
             $.ajax({
                 url: "/Monumentos/FazReserva",

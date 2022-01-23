@@ -27,7 +27,6 @@ namespace SpotGuru.Models
                     Slots s = new Slots
                     {
                         HoraInicial = new DateTime(2022, 1, 25, i, 0, 0),
-                        HoraFinal = new DateTime(2022, 1, 25, i+1, 0, 0),
                         Utilizador = null
                     };
                     slots.Add(s);
@@ -37,8 +36,9 @@ namespace SpotGuru.Models
                 Horario horario = new Horario {
 
                     HoraAbertura = 8,
-                    HoraEncerrament = 22,
+                    HoraEncerramento = 22,
                     CustoSlot = 0,
+                    DuracaoSlot = 60,
                     Slots = slots
                 };
 

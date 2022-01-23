@@ -9,7 +9,8 @@ namespace SpotGuru.ViewModels
     {
         public int Id { get; set; }
         public int HoraAbertura { get; set; }
-        public int HoraEncerrament { get; set; }
+        public int HoraEncerramento { get; set; }
+        public int DuracaoSlot { get; set; }
         public float CustoSlot { get; set; }
 
         public DateTime DiaAtual { get; set; }
@@ -19,13 +20,14 @@ namespace SpotGuru.ViewModels
 
         public Dictionary<DateTime, Slots> SlotsOcupadosPorOutros { get; set; }
 
-        public HorarioView(int id, int horaAbertura, int horaEncerrament, float custoSlot, List<Slots> slots, IdentityUser user)
+        public HorarioView(int id, int horaAbertura, int horaEncerramento, int duracaoSlot, float custoSlot, List<Slots> slots, IdentityUser user)
         {
             DiaAtual = DateTime.Now.Date;
             Id = id;
             HoraAbertura = horaAbertura;
-            HoraEncerrament = horaEncerrament;
+            HoraEncerramento = horaEncerramento;
             CustoSlot = custoSlot;
+            DuracaoSlot = duracaoSlot;
 
             SlotsDisponiveis = new Dictionary<DateTime, Slots>();
             SlotsOcupadosPeloUser = new Dictionary<DateTime, Slots>();
@@ -60,10 +62,6 @@ namespace SpotGuru.ViewModels
             dia = dia.AddDays(diferencaDias);
             dia = dia.AddHours(HoraInicial);
 
-            Console.WriteLine(diferencaDias);
-            Console.WriteLine(HoraInicial);
-            Console.WriteLine(dia);
-
             Slots s=null;
             if (SlotsDisponiveis.TryGetValue(dia,out s))
             {
@@ -81,7 +79,6 @@ namespace SpotGuru.ViewModels
                     Estado = 2
                 };
             }
-
             if (SlotsOcupadosPorOutros.TryGetValue(dia, out s))
             {
                 return new IdPlusEstadoView

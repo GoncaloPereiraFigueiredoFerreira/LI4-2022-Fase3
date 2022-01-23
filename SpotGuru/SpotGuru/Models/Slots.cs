@@ -7,7 +7,6 @@ namespace SpotGuru.Models
     {
         public int Id { get; set; }
         public DateTime HoraInicial { get; set; }
-        public DateTime HoraFinal { get; set; }
         public Microsoft.AspNetCore.Identity.IdentityUser Utilizador { get; set; }
 
 
@@ -20,7 +19,6 @@ namespace SpotGuru.Models
         {
             Id = id;
             HoraInicial = horaI;
-            HoraFinal = horaF;
             this.Utilizador = Utilizador;
         }
     }

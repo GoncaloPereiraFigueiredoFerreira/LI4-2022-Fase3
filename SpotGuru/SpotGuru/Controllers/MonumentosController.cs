@@ -118,10 +118,20 @@ namespace SpotGuru.Controllers
             }
             int idFixo = id.GetValueOrDefault();
 
-            var monumentos = await _context.Monumentos.Include("Horario.Slots").FirstOrDefaultAsync(m => m.Id == id);
+
+            Monumentos monumentos;
+            try
+            {
+                monumentos = await _context.Monumentos.Include("Horario.Slots.Utilizador").FirstAsync(m => m.Id == id);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+
             var horario = monumentos.Horario;
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var horarioView = new HorarioView(idFixo,horario.HoraAbertura,horario.HoraEncerrament,horario.CustoSlot, horario.Slots, await _context.Users.FindAsync(userId));
+            var horarioView = new HorarioView(idFixo, horario.HoraAbertura, horario.HoraEncerramento, horario.DuracaoSlot, horario.CustoSlot, horario.Slots, await _context.Users.FindAsync(userId));
             if (horarioView == null)
             {
                 return NotFound();
@@ -131,17 +141,32 @@ namespace SpotGuru.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> FazReserva(int id)
+        public async Task<IActionResult> FazReserva(int? idHorario, int id)
         {
+            Console.WriteLine("idHorario: " + idHorario);
+            Console.WriteLine("id: " + id);
+
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
 
-            var Slots = await _context.Slots.FirstOrDefaultAsync(slot => slot.Id == id);
-            Slots.Utilizador = user;
-            _context.Slots.Update(Slots);
-            await _context.SaveChangesAsync();
+            Slots slot;
 
-            return View("Index","Home");
+            try { 
+                slot = await _context.Slots.Include("Utilizador").FirstAsync(s => s.Id == id);
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+
+            if (slot.Utilizador == null)
+            {
+                slot.Utilizador = user;
+                _context.Slots.Update(slot);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Horario", new { @id = idHorario });
         }
 
         // Add Monumento
