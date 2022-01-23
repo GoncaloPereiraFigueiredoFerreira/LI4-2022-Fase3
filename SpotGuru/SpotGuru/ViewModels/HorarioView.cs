@@ -35,14 +35,20 @@ namespace SpotGuru.ViewModels
         }
 
         //Return Values:
+        //  -> 0 - Indisponivel
         //  -> 1 - Disponivel
         //  -> 2 - Ocupado pelo próprio utilizador
         //  -> 3 - Ocupado por outros utilizadores
         public int slotDisponibilidade(int idSlot)
         {
             Slots slot = null;
-            
-            if (!SlotsOcupados.TryGetValue(idSlot, out slot)) return 1;
+
+            if (!SlotsOcupados.TryGetValue(idSlot, out slot))
+            {
+                if (DateTime.Now.CompareTo(HorarioHelper.calculaDiaEHora(idSlot, HoraAbertura, HoraEncerramento, DuracaoSlot, DateTime.Today)) < 0)
+                    return 1;
+                return 0;
+            }
             else
             {
                 if (slot.Utilizador.Id == Utilizador.Id) return 2;

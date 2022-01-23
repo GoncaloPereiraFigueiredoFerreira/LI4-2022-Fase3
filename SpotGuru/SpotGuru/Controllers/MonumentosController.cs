@@ -141,35 +141,6 @@ namespace SpotGuru.Controllers
         }
 
 
-        /*[HttpGet]
-        public async Task<IActionResult> FazReserva(int? idHorario, int id)
-        {
-            Console.WriteLine("idHorario: " + idHorario);
-            Console.WriteLine("id: " + id);
-
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
-
-            Slots slot;
-
-            try { 
-                slot = await _context.Slots.Include("Utilizador").FirstAsync(s => s.Id == id);
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
-
-            if (slot.Utilizador == null)
-            {
-                slot.Utilizador = user;
-                _context.Slots.Update(slot);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction("Horario", new { @id = idHorario });
-        }*/
-
         [HttpGet]
         public async Task<IActionResult> handleSlot(int? idHorario, int id)
         {
@@ -194,7 +165,6 @@ namespace SpotGuru.Controllers
 
             //calcula a data a que o id corresponde
             DateTime data = HorarioHelper.calculaDiaEHora(id, horario.HoraAbertura, horario.HoraEncerramento, horario.DuracaoSlot, DateTime.Today);
-            Console.WriteLine("IdSlot: " + id + "    | Data: " + data.ToString());
 
             try 
             {

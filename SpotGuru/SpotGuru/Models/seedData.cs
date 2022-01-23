@@ -21,26 +21,8 @@ namespace SpotGuru.Models
                     return;   // DB has been seeded
                 }
 
-                List<Slots> slots = new List<Slots>();
-                for(int i = 10; i < 20; i++)
-                {
-                    Slots s = new Slots
-                    {
-                        HoraInicial = new DateTime(2022, 1, 25, i, 0, 0),
-                        Utilizador = null
-                    };
-                    slots.Add(s);
-                    context.Add(s);
-                }
-
-                Horario horario = new Horario {
-
-                    HoraAbertura = 8,
-                    HoraEncerramento = 22,
-                    CustoSlot = 0,
-                    DuracaoSlot = 60,
-                    Slots = slots
-                };
+               
+                List<Monumentos> monumentos = new List<Monumentos>();
 
                 Monumentos bomJesus = new Monumentos
                 {
@@ -49,10 +31,12 @@ namespace SpotGuru.Models
                     Latitude = 41.554761,
                     Categoria = Categorias.Sanctuary,
                     Longitude = -8.377084,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "bomjesus.jpg"
                 };
+                monumentos.Add(bomJesus);
+
+
                 Monumentos sameiro = new Monumentos
                 {
                     Nome = "Santuario de Nossa Senhora do Sameiro",
@@ -60,10 +44,12 @@ namespace SpotGuru.Models
                     Latitude = 41.542471,
                     Categoria = Categorias.Sanctuary,
                     Longitude = -8.369686,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "santuariosameiro.jpg"
                 };
+                monumentos.Add(sameiro);
+
+
                 Monumentos ddiogo= new Monumentos
                 {
                     Nome = "Museu de Arqueologia D. Diogo de Sousa",
@@ -71,10 +57,12 @@ namespace SpotGuru.Models
                     Latitude = 41.546083,
                     Categoria = Categorias.Museum,
                     Longitude = -8.427188,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "museudiogo.png"
                 };
+                monumentos.Add(ddiogo);
+
+
                 Monumentos mSe = new Monumentos
                 {
                     Nome = "Museu da Sé de Braga",
@@ -82,10 +70,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Museum,
                     Latitude = 41.550393,
                     Longitude = -8.427576,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "museusebraga.jpg"
                 };
+                monumentos.Add(mSe);
+
+
                 Monumentos montariol = new Monumentos
                 {
                     Nome = "Convento Franciscano de Montariol",
@@ -93,10 +83,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Convent,
                     Latitude = 41.569934,
                     Longitude = -8.410950,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "conventofran.jpg"
                 };
+                monumentos.Add(montariol);
+
+
                 Monumentos saoVitor = new Monumentos
                 {
                     Nome = "Igreja de São Victor",
@@ -104,10 +96,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Church,
                     Latitude = 41.553510,
                     Longitude = -8.413584,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "igrejasaovictor.jpg"
                 };
+                monumentos.Add(saoVitor);
+
+
                 Monumentos palacioDoRaio = new Monumentos
                 {
                     Nome = "Palácio do Raio",
@@ -115,10 +109,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Museum,
                     Latitude = 41.548886,
                     Longitude = -8.422631,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "palaciodoraio.jpg"
                 };
+                monumentos.Add(palacioDoRaio);
+
+
                 Monumentos biscainhos = new Monumentos
                 {
                     Nome = "Museu dos Biscainhos",
@@ -126,10 +122,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Museum,
                     Latitude = 41.551474,
                     Longitude = -8.429301,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "museubiscainhos.jpg"
                 };
+                monumentos.Add(biscainhos);
+
+
                 Monumentos tibaes = new Monumentos
                 {
                     Nome = "Mosteiro de Tibães",
@@ -137,10 +135,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Monastery,
                     Latitude = 41.556407,
                     Longitude = -8.478617,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "mosteriodetibaes.jpg"
                 };
+                monumentos.Add(tibaes);
+
+
                 Monumentos barbara = new Monumentos
                 {
                     Nome = "Jardim de Santa Bárbara",
@@ -148,10 +148,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.TouristAttraction,
                     Latitude = 41.551520,
                     Longitude = -8.425855,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "jardimsantabarbara.jpg"
                 };
+                monumentos.Add(barbara);
+
+
                 Monumentos paco = new Monumentos
                 {
                     Nome = "Paços do Concelho de Braga",
@@ -159,10 +161,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.HistoricalReferencePoint,
                     Latitude = 41.551011,
                     Longitude = -8.428384,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "pacosdoconselho.jpg"
                 };
+                monumentos.Add(paco);
+
+
                 Monumentos populo = new Monumentos
                 {
                     Nome = "Igreja do Pópulo",
@@ -170,10 +174,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Church,
                     Latitude = 41.551896,    
                     Longitude = -8.429268,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "igrejapopulo.jpg"
                 };
+                monumentos.Add(populo);
+
+
                 Monumentos palmeira = new Monumentos
                 {
                     Nome = "Igreja de Palmeira",
@@ -181,10 +187,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Church,
                     Latitude = 41.590084,
                     Longitude = -8.426753,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "igrejapalmeira.jpg"
                 };
+                monumentos.Add(palmeira);
+
+
                 Monumentos se = new Monumentos
                 {
                     Nome = "Sé de Braga",
@@ -192,10 +200,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Cathedral,
                     Latitude = 41.550234,
                     Longitude = -8.426991,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "sebraga.jpg"
                 };
+                monumentos.Add(se);
+
+
                 Monumentos sntCruz = new Monumentos
                 {
                     Nome = "Igreja de Santa Cruz",
@@ -203,10 +213,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Church,
                     Latitude = 41.549541,
                     Longitude = -8.423975,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "igrejaSantaCruz.jpg"
                 };
+                monumentos.Add(sntCruz);
+
+
                 Monumentos chafariz = new Monumentos
                 {
                     Nome = "Chafariz da Praça da República",
@@ -214,10 +226,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.TouristAttraction,
                     Latitude = 41.551440,  
                     Longitude = -8.423092,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "chafarizPracaRepublica.jpg"
                 };
+                monumentos.Add(chafariz);
+
+
                 Monumentos congregados = new Monumentos
                 {
                     Nome = "Basílica dos Congregados",
@@ -225,10 +239,12 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Basilica,
                     Latitude = 41.551123,
                     Longitude = -8.421345,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "basilicaCongregados.jpg"
                 };
+                monumentos.Add(congregados);
+
+
                 Monumentos arco = new Monumentos
                 {
                     Nome = "Arco da Porta Nova",
@@ -236,29 +252,26 @@ namespace SpotGuru.Models
                     Categoria = Categorias.Sculpture,
                     Latitude  = 41.550441,
                     Longitude = -8.429299,
-                    Horario = horario,
                     Reviews = new List<Review>(),
                     pathFoto = "arcoPortaNova.jpg"
                 };
-                context.Add(horario);
-                context.Add(bomJesus);
-                context.Add(arco);
-                context.Add(congregados);
-                context.Add(chafariz);
-                context.Add(sntCruz);
-                context.Add(se);
-                context.Add(palmeira);
-                context.Add(populo);
-                context.Add(paco);
-                context.Add(barbara);
-                context.Add(sameiro);
-                context.Add(ddiogo);
-                context.Add(mSe);
-                context.Add(montariol);
-                context.Add(saoVitor);
-                context.Add(palacioDoRaio);
-                context.Add(biscainhos);
-                context.Add(tibaes);
+                monumentos.Add(arco);
+
+
+                foreach(Monumentos m in monumentos)
+                {
+                    Horario horario = new Horario
+                    {
+                        HoraAbertura = 8,
+                        HoraEncerramento = 22,
+                        CustoSlot = 0,
+                        DuracaoSlot = 60,
+                        Slots = new List<Slots>()
+                    };
+                    context.Add(horario);
+                    m.Horario = horario;
+                    context.Add(m);
+                }
 
                 context.SaveChanges();
             }
