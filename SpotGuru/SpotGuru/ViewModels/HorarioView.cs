@@ -30,6 +30,7 @@ namespace SpotGuru.ViewModels
             SlotsDisponiveis = new Dictionary<DateTime, Slots>();
             SlotsOcupadosPeloUser = new Dictionary<DateTime, Slots>();
             SlotsOcupadosPorOutros = new Dictionary<DateTime, Slots>();
+
             foreach (Slots s in slots)
             {
                 IdentityUser utilizador = s.Utilizador;
@@ -48,7 +49,7 @@ namespace SpotGuru.ViewModels
             }
         }
 
-        public int slotDisponibilidade(int diaSemana, int HoraInicial)
+        public IdPlusEstadoView slotDisponibilidade(int diaSemana, int HoraInicial)
         {
             int diferencaDias = (int)DiaAtual.DayOfWeek - diaSemana;
             if (diferencaDias < 0)
@@ -56,23 +57,44 @@ namespace SpotGuru.ViewModels
                 diferencaDias = Math.Abs(diferencaDias) + (int)DiaAtual.DayOfWeek;
             }
             DateTime dia = DiaAtual;
-            dia.AddDays(diferencaDias);
-            dia.AddHours(HoraInicial);
+            dia = dia.AddDays(diferencaDias);
+            dia = dia.AddHours(HoraInicial);
 
-            if (SlotsDisponiveis.ContainsKey(dia))
+            Console.WriteLine(diferencaDias);
+            Console.WriteLine(HoraInicial);
+            Console.WriteLine(dia);
+
+            Slots s=null;
+            if (SlotsDisponiveis.TryGetValue(dia,out s))
             {
-                return 1;
+                return new IdPlusEstadoView
+                {
+                    Id= s.Id,
+                    Estado=1
+                };
             }
-            if (SlotsOcupadosPeloUser.ContainsKey(dia))
+            if (SlotsOcupadosPeloUser.TryGetValue(dia, out s))
             {
-                return 2;
+                return new IdPlusEstadoView
+                {
+                    Id = s.Id,
+                    Estado = 2
+                };
             }
 
-            if (SlotsOcupadosPorOutros.ContainsKey(dia))
+            if (SlotsOcupadosPorOutros.TryGetValue(dia, out s))
             {
-                return 3;
+                return new IdPlusEstadoView
+                {
+                    Id = s.Id,
+                    Estado = 3
+                };
             }
-            return 0;
+            return new IdPlusEstadoView
+            {
+                Id = -1,
+                Estado = 0
+            };
         }
     }
 }

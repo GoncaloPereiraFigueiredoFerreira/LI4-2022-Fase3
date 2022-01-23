@@ -118,7 +118,7 @@ namespace SpotGuru.Controllers
             }
             int idFixo = id.GetValueOrDefault();
 
-            var monumentos = await _context.Monumentos.Include("Horario").FirstOrDefaultAsync(m => m.Id == id);
+            var monumentos = await _context.Monumentos.Include("Horario.Slots").FirstOrDefaultAsync(m => m.Id == id);
             var horario = monumentos.Horario;
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var horarioView = new HorarioView(idFixo,horario.HoraAbertura,horario.HoraEncerrament,horario.CustoSlot, horario.Slots, await _context.Users.FindAsync(userId));
@@ -126,8 +126,22 @@ namespace SpotGuru.Controllers
             {
                 return NotFound();
             }
-
             return View(horarioView);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> FazReserva(int id)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Microsoft.AspNetCore.Identity.IdentityUser user = _context.Users.Find(userId);
+
+            var Slots = await _context.Slots.FirstOrDefaultAsync(slot => slot.Id == id);
+            Slots.Utilizador = user;
+            _context.Slots.Update(Slots);
+            await _context.SaveChangesAsync();
+
+            return View("Index","Home");
         }
 
         // Add Monumento

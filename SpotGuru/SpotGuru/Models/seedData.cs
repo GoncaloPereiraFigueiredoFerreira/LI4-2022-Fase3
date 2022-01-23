@@ -20,12 +20,26 @@ namespace SpotGuru.Models
                 {
                     return;   // DB has been seeded
                 }
+
+                List<Slots> slots = new List<Slots>();
+                for(int i = 10; i < 20; i++)
+                {
+                    Slots s = new Slots
+                    {
+                        HoraInicial = new DateTime(2022, 1, 25, i, 0, 0),
+                        HoraFinal = new DateTime(2022, 1, 25, i+1, 0, 0),
+                        Utilizador = null
+                    };
+                    slots.Add(s);
+                    context.Add(s);
+                }
+
                 Horario horario = new Horario {
 
                     HoraAbertura = 8,
                     HoraEncerrament = 22,
                     CustoSlot = 0,
-                    Slots = new List<Slots>()
+                    Slots = slots
                 };
 
                 Monumentos bomJesus = new Monumentos

@@ -1,4 +1,5 @@
-﻿@model SpotGuru.ViewModels.HorarioView
+﻿@using SpotGuru.ViewModels
+@model SpotGuru.ViewModels.HorarioView
 
 <div>
     <h4>Schedule</h4>
@@ -67,12 +68,13 @@
                     @{
                         for(var dia = 0; dia<7; dia++)
                         {
-                            switch(Model.slotDisponibilidade(dia,i))
+                            IdPlusEstadoView ipe = Model.slotDisponibilidade(dia,i);
+                            switch(ipe.Estado)
                             {
                                 case 1:
                                     <td>
                                         <label class="quadrado">
-                                            <input type="checkbox">
+                                            <input type="checkbox" onclick="FazReserva()"> 
                                             <span class="checkmark"></span>
                                         </label>
                                     </td>
@@ -80,7 +82,7 @@
                                 case 2:
                                     <td>
                                         <label class="quadrado">
-                                        <input type="checkbox">
+                                        <input type="checkbox" checked="checked">
                                         <span class="checkmark"></span>
                                         </label>
                                     </td>
@@ -103,3 +105,18 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        var FazReserva = function(){
+
+            location.href= "/Monumentos/FazReserva?id=3";
+            /*
+            $.ajax({
+                url: "/Monumentos/FazReserva",
+                type: "POST",
+                data: {Id: id}
+            })
+            */
+        }
+
+    </script>
