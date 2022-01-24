@@ -32,59 +32,6 @@ namespace SpotGuru.Controllers
                                       .ToListAsync());
         }
 
-        // GET: Favoritos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var favoritos = await _context.Favoritos.Include("Monumentos").Include("Utilizador")
-                                                    .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (favoritos == null)
-            {
-                return NotFound();
-            }
-
-            _context.Historico.Add(new Historico { Monumentos = favoritos.Monumentos, Utilizador = favoritos.Utilizador });
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Details", "Monumentos", new {@id=favoritos.Monumentos.Id});
-        }
-
-
-        // GET: Favoritos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var favoritos = await _context.Favoritos.Include("Monumentos")
-                .FirstOrDefaultAsync(fav => fav.Id == id);
-
-            if (favoritos == null)
-            {
-                return NotFound();
-            }
-
-            return View(favoritos);
-        }
-
-        // POST: Favoritos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var favoritos = await _context.Favoritos.FindAsync(id);
-            _context.Favoritos.Remove(favoritos);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         //TODO - n tem await
         private bool FavoritosExists(int id)
         {
