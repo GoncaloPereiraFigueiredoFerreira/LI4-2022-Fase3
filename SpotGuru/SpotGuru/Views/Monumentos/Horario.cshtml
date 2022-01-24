@@ -6,19 +6,19 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HoraAbertura)
+            @Html.DisplayName("Hora de Abertura")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.HoraAbertura)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HoraEncerramento)
+            @Html.DisplayName("Hora de Encerramento")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.HoraEncerramento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustoSlot)
+            @Html.DisplayName("Custo(€)")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CustoSlot)
@@ -30,15 +30,17 @@
 <div>
     <h4>Horario</h4>
 
-    <table class="table">
+    <table class="table" style="table-layout: fixed; width: 100%;">
             <tr>
-                <th>
-                    Inicio
-                </th>
+                <td>
+                    <strong>Inicio</strong>
+                </td>
                 @for(int i = 0; i < 7; i++){
-                    <th class="text-center">
-                        @Html.DisplayName(Model.DiaAtual.AddDays(i).DayOfWeek.ToString())
-                    </th>
+                    <td class="text-center">
+                         <strong>
+                             @Html.DisplayName(Model.DiaAtual.AddDays(i).DayOfWeek.ToString())
+                         </strong>
+                    </td>
                 }
             </tr>
         <tbody>

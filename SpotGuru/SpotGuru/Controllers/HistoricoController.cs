@@ -72,9 +72,6 @@ namespace SpotGuru.Controllers
                 return NotFound();
             }
 
-            _context.Historico.Add(new Historico { Monumentos = entradaHistorico.Monumentos, Utilizador = entradaHistorico.Utilizador });
-            await _context.SaveChangesAsync();
-
             return RedirectToAction("Details", "Monumentos", new { @id=entradaHistorico.Monumentos.Id});
         } 
 
