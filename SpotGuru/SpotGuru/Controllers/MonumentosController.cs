@@ -244,7 +244,6 @@ namespace SpotGuru.Controllers
             }
             catch(Exception ignored) { }
 
-
             return RedirectToAction("Details", "Monumentos", new { @id = id });
         }
 
