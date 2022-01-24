@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alexandr___of\\Desktop\\UM\\Ano3\\Semestre1\\LI4\\3ª fase\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj": {}
+    "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alexandr___of\\Desktop\\UM\\Ano3\\Semestre1\\LI4\\3ª fase\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj": {
+    "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alexandr___of\\Desktop\\UM\\Ano3\\Semestre1\\LI4\\3ª fase\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
         "projectName": "SpotGuru",
-        "projectPath": "C:\\Users\\Alexandr___of\\Desktop\\UM\\Ano3\\Semestre1\\LI4\\3ª fase\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
-        "packagesPath": "C:\\Users\\Alexandr___of\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alexandr___of\\Desktop\\UM\\Ano3\\Semestre1\\LI4\\3ª fase\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\obj\\",
+        "projectPath": "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\SpotGuru.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Acer\\Source\\Repos\\GoncaloPereiraFigueiredoFerreira\\LI4-2022-Fase3\\SpotGuru\\SpotGuru\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Alexandr___of\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,6 +77,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.13, 5.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
